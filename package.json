@@ -1,12 +1,31 @@
 {
-  "name": "@username/svg-symbol-sprite-loader",
-  "version": "1.0.0",
-  "description": "",
+  "name": "svg-symbol-sprite-loader",
+  "version": "0.0.0",
+  "description": "Loader and plugin for generating an SVG symbol sprite",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "prepush": "npm test",
+    "commit": "git cz",
+    "format": "prettier --write index.js",
+    "lint": "cross-env NODE_ENV=test eslint index.js"
   },
-  "keywords": [],
-  "author": "Dan Hedgecock <hedgecock.d@gmail.com> (https://danhedgecock.com)",
-  "license": "ISC"
+  "keywords": ["webpack", "svg", "loader", "sprite"],
+  "contributors": [
+    "Dan Hedgecock <hedgecock.d@gmail.com> (https://danhedgecock.com)"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@crystal-ball/eslint-config-eloquence": "^6.1.2",
+    "commitizen": "^2.9.6",
+    "cross-env": "^5.1.1",
+    "cz-customizable": "^5.2.0",
+    "husky": "^0.14.3",
+    "prettier": "^1.9.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
+  }
 }
