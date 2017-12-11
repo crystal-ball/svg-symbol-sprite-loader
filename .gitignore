@@ -1,0 +1,9 @@
+# Dependencies
+node_modules
+
+# Config
+.vscode
+
+# Output
+.esm-cache
+docs

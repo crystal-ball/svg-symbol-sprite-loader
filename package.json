@@ -1,0 +1,12 @@
+{
+  "name": "@username/svg-symbol-sprite-loader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Dan Hedgecock <hedgecock.d@gmail.com> (https://danhedgecock.com)",
+  "license": "ISC"
+}
