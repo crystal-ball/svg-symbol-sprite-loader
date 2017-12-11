@@ -59,5 +59,5 @@ All contributions are greatly appreciated 👍🎉. To contribute please:
 
 <!-- Links -->
 
-[conduct]: './CODE_OF_CONDUCT.md'
-[contributing]: './CONTRIBUTING.md'
+[conduct]: ./CODE_OF_CONDUCT.md
+[contributing]: ./CONTRIBUTING.md
