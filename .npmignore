@@ -4,6 +4,7 @@
 .esm-cache
 
 # Config
+.babelrc
 .vscode
 .cz-config.js
 .eslintrc.js
@@ -17,3 +18,5 @@ __mocks__
 # Documentation
 docs
 guides
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
