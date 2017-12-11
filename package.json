@@ -15,6 +15,10 @@
   "contributors": [
     "Dan Hedgecock <hedgecock.d@gmail.com> (https://danhedgecock.com)"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crystal-ball/svg-symbol-sprite-loader.git"
+  },
   "license": "ISC",
   "peerDependencies": {
     "webpack": "^3"
