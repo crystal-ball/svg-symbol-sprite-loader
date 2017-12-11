@@ -10,6 +10,10 @@
 .prettierrc
 documentation.yml
 
+# Tests
+**/*.spec.js
+__mocks__
+
 # Documentation
 docs
 guides

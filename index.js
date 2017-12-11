@@ -1,1 +1,0 @@
-// SVG Symbol Sprite Loader 🎉

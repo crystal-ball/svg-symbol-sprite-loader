@@ -1,14 +1,14 @@
 # SVG Symbol Sprite Loader
 
-This webpack loader aggregates imported SVGs into a separate `<symbol>` sprite file.
-An svg symbol sprite is very effective for creating an icon system, and using a
-loader to bundle imported SVGs makes it simple to dynamically create a sprite that
-only includes SVGs used in your application 🎉.
+This webpack loader aggregates imported SVGs into a separate `<symbol>` sprite
+file. An svg symbol sprite is very effective for creating an icon system, and
+using a loader to bundle imported SVGs makes it simple to dynamically create a
+sprite that only includes SVGs used in your application 🎉.
 
 This repository includes an **optional** `local-storage-svg-loader.js` that will
-fetch an SVG sprite at the configured url and save it to local storage using the url
-as an id. On subsequent visits to your application if the sprite id hasn't changed
-the sprite will be served from local storage.
+fetch an SVG sprite at the configured url and save it to local storage using the
+url as an id. On subsequent visits to your application if the sprite id hasn't
+changed the sprite will be served from local storage.
 
 ## Install
 
@@ -18,14 +18,16 @@ npm install svg-symbol-sprite-loader
 
 ## Configure
 
-⚠️ The below example covers the bare minimum configuration required to generate an
-`icon-sprite.svg` file at your build output destination. It does not configure your
-application to consume the sprite.
+⚠️ The below example covers the bare minimum configuration required to generate
+an `icon-sprite.svg` file at your build output destination. It does not
+configure your application to consume the sprite.
 
 ✅ See the `/example` directory for a real world usage example that generates a
 hashed file for cache busting that is fetched+stored in local storage.
 
 ```javascript
+const SVGSymbolSpritePlugin = require('svg-symbol-sprite-loader/src/plugin')
+
 module.exports = {
   module: {
     rules: [
