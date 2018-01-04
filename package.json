@@ -11,7 +11,12 @@
     "format": "prettier --write src/*.js",
     "lint": "cross-env NODE_ENV=test eslint src/*"
   },
-  "keywords": ["webpack", "svg", "loader", "sprite"],
+  "keywords": [
+    "webpack",
+    "svg",
+    "loader",
+    "sprite"
+  ],
   "contributors": [
     "Dan Hedgecock <hedgecock.d@gmail.com> (https://danhedgecock.com)"
   ],
