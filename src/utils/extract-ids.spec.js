@@ -25,3 +25,23 @@ test('appends an import for every component instance', () => {
   expect(result.includes("import 'media/icons/react.svg'")).toBeTruthy()
   expect(result.includes("import 'media/icons/webpack.svg'")).toBeTruthy()
 })
+
+test('does not 💥 when a component is not in the source', () => {
+  const noIconSource = `import React from 'react'
+
+import Icon from './Icon'
+
+const App = () => (
+  <div>
+    <p>
+      This app will create a sprite of only the SVGs referenced by the Icon
+      component.
+    </p>
+  </div>
+)
+
+export default App`
+  const result = extractIds(noIconSource, { importPath: 'media/icons' })
+
+  expect(result).toBe(result)
+})
