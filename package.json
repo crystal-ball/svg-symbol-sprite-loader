@@ -4,10 +4,11 @@
   "description": "Loader and plugin for generating an SVG symbol sprite",
   "main": "src/loader.js",
   "scripts": {
+    "commit": "git cz",
     "test": "npm run lint && jest",
     "prepush": "npm test",
+    "container": "docker-compose run --service-ports --rm svg",
     "test:unit": "jest",
-    "commit": "git cz",
     "format": "prettier --write src/*.js",
     "lint": "cross-env NODE_ENV=test eslint src/*"
   },

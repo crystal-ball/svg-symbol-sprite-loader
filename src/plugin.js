@@ -6,6 +6,10 @@ const SpriteStore = require('./sprite-store')
 // Class acts as the store for imported SVGs
 const spriteStore = new SpriteStore()
 
+const getSpriteContent = () => {
+  return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${spriteStore.getSpriteContent()}</svg>`
+}
+
 /**
  * The plugin handles:
  * 1. Merging plugin configuration with default configs
@@ -31,6 +35,10 @@ module.exports = class SVGSymbolSpritePlugin {
         filename: 'icon-sprite.svg',
         /** The `chunkName` defintes the name of the manifest entry */
         chunkName: 'icon-sprite',
+        /** When true, inject a chunk into webpack chunks */
+        injectChunk: false,
+        /** When true, inject `SVG_SYMBOL_SPRITE_ID` into `window` */
+        injectSpriteId: true,
       },
       options,
     )
@@ -41,40 +49,58 @@ module.exports = class SVGSymbolSpritePlugin {
    * event hooks on the compiler.
    */
   apply(compiler) {
-    /* eslint-disable class-methods-use-this */
     /* eslint-disable no-param-reassign */
+    const { filename, chunkName } = this.options
 
-    // 'emit' hook is called when assets are emitted? ¯\_(ツ)_/¯
-    compiler.plugin('emit', (compilation, callback) => {
-      const { filename, chunkName } = this.options
+    compiler.plugin('this-compilation', compilation => {
+      compilation.plugin('additional-assets', callback => {
+        // Generate interpolated name with content source for hashing
+        const content = getSpriteContent()
+        const resourcePath = interpolateName({}, filename, { content })
 
-      const content = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${spriteStore.getSpriteContent()}</svg>`
+        // This plugin purposely does not handle fetching the generated sprite.
+        // Instead we ensure that our emitted file is included in the build manifest
+        // and allow consumer to decide how to fetch+cache sprite.
+        // The manifest will not include the file unless it has a corresponding
+        // 'chunk' to reference so we create a chunk and include the sprite as a file
+        // in the chunk.
+        const svgChunk = new Chunk(chunkName)
+        svgChunk.ids = []
+        svgChunk.files.push(resourcePath)
+        compilation.chunks.push(svgChunk)
 
-      // Generate interpolated name
-      const resourcePath = interpolateName({}, filename, { content })
+        compilation.assets[resourcePath] = {
+          source() {
+            return content
+          },
+          size() {
+            return content.length
+          },
+        }
 
-      // This plugin purposely does not handle fetching the generated sprite.
-      // Instead we ensure that our emitted file is included in the build manifest
-      // and allow consumer to decide how to fetch+cache sprite.
-      // The manifest will not include the file unless it has a corresponding
-      // 'chunk' to reference so we create a chunk and include the sprite as a file
-      // in the chunk.
-      const svgChunk = new Chunk(chunkName)
-      svgChunk.ids = []
-      svgChunk.files.push(resourcePath)
-      compilation.chunks.push(svgChunk)
+        callback() // We're done 🎉
+      })
 
-      // Insert the sprite into the webpack build as a new file asset:
-      compilation.assets[resourcePath] = {
-        source() {
-          return content
+      compilation.plugin(
+        'html-webpack-plugin-alter-asset-tags',
+        (htmlPluginData, callback) => {
+          // Generate interpolated name with content source for hashing
+          const content = getSpriteContent()
+          const resourcePath = interpolateName({}, filename, { content })
+
+          // Add script tag with hashed resource id
+          htmlPluginData.head.push({
+            tagName: 'script',
+            closeTag: true,
+            attributes: {
+              type: 'text/javascript',
+            },
+            innerHTML: `window.SVG_SYMBOL_SPRITE_ID = "${resourcePath}"`,
+          })
+
+          callback(null, htmlPluginData) // We're done 🎉
         },
-        size() {
-          return content.length
-        },
-      }
-
-      callback() // We're done 🎉
+      )
     })
   }
 }

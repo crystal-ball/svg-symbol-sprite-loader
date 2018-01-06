@@ -1,0 +1,22 @@
+# Dependencies
+node_modules
+
+# Logs
+npm-debug.log
+
+# Output
+build
+
+# esmodules
+.esm-cache
+
+# Config
+.vscode
+.cz-config.js
+.eslintrc.js
+.prettierrc
+.prettierignore
+documentation.yml
+
+# Documentation
+docs
