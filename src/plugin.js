@@ -6,9 +6,8 @@ const SpriteStore = require('./sprite-store')
 // Class acts as the store for imported SVGs
 const spriteStore = new SpriteStore()
 
-const getSpriteContent = () => {
-  return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${spriteStore.getSpriteContent()}</svg>`
-}
+const getSpriteContent = () =>
+  `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${spriteStore.getSpriteContent()}</svg>`
 
 /**
  * The plugin handles:
