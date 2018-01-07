@@ -1,5 +1,5 @@
 const { interpolateName } = require('loader-utils')
-// const Chunk = require('webpack/lib/Chunk')
+const Chunk = require('webpack/lib/Chunk')
 // const { ConcatSource } = require('webpack-sources')
 
 const SpriteStore = require('./sprite-store')
@@ -33,21 +33,15 @@ module.exports = class SVGSymbolSpritePlugin {
       {
         /** The `filename` defines the name of the emitted asset */
         filename: 'icon-sprite.svg',
-        /** The `chunkName` defines the name of the manifest entry */
-        // chunkName: 'icon-sprite',
-        /**
-         * Identifier for the chunk that the global sprite id assignment source
-         * should be injected into. If an identifier isn't specified, the id assignment
-         * is not injected.
-         */
-        // spriteIdInjectionChunk: '',
-        /** When true, inject a chunk into webpack chunks */
-        // injectChunk: false,
-        /** When true, inject `SVG_SYMBOL_SPRITE_ID` into `window` */
-        // injectSpriteId: true,
       },
       options,
     )
+
+    // loader-utils only supports [hash] interpolation
+    const { filename } = this.options
+    if (filename.includes('[chunkhash]')) {
+      this.options.filename = filename.replace('[chunkhash]', '[hash]')
+    }
   }
 
   /**
@@ -59,29 +53,6 @@ module.exports = class SVGSymbolSpritePlugin {
     const { filename } = this.options
 
     compiler.plugin('this-compilation', compilation => {
-      // During chunk asset optimization, if plugin is configured to inject the
-      // generated sprite id, add the code to attach id to window
-      // compilation.plugin('optimize-chunk-assets', (chunks, callback) => {
-      //   chunks.forEach(chunk => {
-      //     chunk.files.forEach(file => {
-      //       if (!spriteIdInjectionChunk) return
-      //       if (!file.match(spriteIdInjectionChunk)) return
-
-      //       const content = getSpriteContent()
-      //       const resourcePath = interpolateName({}, filename, { content })
-
-      //       // Rewrite the file using concat to append id injection code
-      //       compilation.assets[file] = new ConcatSource(
-      //         '/* Begin asset id injected by svg-symbol-sprite-loader plugin ---*/\n',
-      //         `;(function(){ window.SVG_SYMBOL_SPRITE_ID = "${resourcePath}" }());\n`,
-      //         '/* End asset id injection ---------------------------------------*/\n',
-      //         compilation.assets[file],
-      //       )
-      //     })
-      //   })
-      //   callback()
-      // })
-
       // During the additional assets compilation hook, generate the sprite content
       // and append it to the compilation assets.
       // ℹ️ This is where the sprite file is created
@@ -91,6 +62,14 @@ module.exports = class SVGSymbolSpritePlugin {
         // Use interpolateName to allow for file name hashing based on content
         const resourcePath = interpolateName({}, filename, { content })
 
+        // 🤔 adding a chunk is required to get the emitted sprite included in the
+        // manifest file. There may be a better way to handle this...
+        const svgChunk = new Chunk('icon-sprite')
+        svgChunk.ids = []
+        svgChunk.files.push(resourcePath)
+        compilation.chunks.push(svgChunk)
+
+        // The asset file is included in the webpack compilation 🎉
         compilation.assets[resourcePath] = {
           source() {
             return content
@@ -98,9 +77,6 @@ module.exports = class SVGSymbolSpritePlugin {
           size() {
             return content.length
           },
-          // name: chunkName,
-          // path: resourcePath,
-          // chunks: [0], // HACK to get included by manifest plugin?
         }
 
         callback()

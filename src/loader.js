@@ -13,9 +13,9 @@ module.exports = function loader(source) {
   const { resourcePath } = this
   const options = getOptions(this) || {}
 
-  if (options.importPath) {
-    return extractIds(source, options)
-  }
+  // Import path specifies that module imports should be injected by loader into
+  // source file
+  if (options.importPath) return extractIds(source, options)
 
   // Add the SVG to the plugin store to be emitted in the sprite
   SVGStore.getStore().addSVG(resourcePath, source)

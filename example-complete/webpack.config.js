@@ -1,6 +1,8 @@
 const { resolve } = require('path')
 const SVGSymbolSpritePlugin = require('svg-symbol-sprite-loader/src/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html-webpack-plugin')
 
 module.exports = env => {
   const configs = {
@@ -10,7 +12,7 @@ module.exports = env => {
 
     output: {
       path: resolve('build'),
-      filename: '[name].js',
+      filename: '[name].[chunkhash].js',
     },
 
     resolve: {
@@ -44,12 +46,20 @@ module.exports = env => {
     plugins: [
       // Extracts the imported SVGs into a separate sprite file
       new SVGSymbolSpritePlugin({
-        filename: 'icon-sprite.svg',
+        filename: 'icon-sprite.[chunkhash].svg',
       }),
+
+      // Extract the webpack manifest into a separate JSON file
+      new ManifestPlugin(),
+
+      // Inline the manifest JSON file into index head
+      new InlineChunkManifestHtmlWebpackPlugin(),
 
       // Generates index.html and injects script and style tags
       new HtmlWebpackPlugin({
-        template: resolve('public', 'index.html'),
+        minify: false,
+        title: 'SVG Symbol Sprite Loader Complete',
+        template: resolve('public/index.html'),
       }),
     ],
   }

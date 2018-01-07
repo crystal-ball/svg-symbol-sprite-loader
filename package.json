@@ -32,8 +32,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "loader-utils": "^1.1.0",
-    "webpack-sources": "^1.1.0"
+    "loader-utils": "^1.1.0"
   },
   "devDependencies": {
     "@crystal-ball/eslint-config-eloquence": "^6.2.0",

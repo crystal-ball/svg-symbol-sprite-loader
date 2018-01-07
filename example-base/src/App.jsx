@@ -2,6 +2,10 @@ import React from 'react'
 
 import Icon from './Icon'
 
+import './media/javascript.svg'
+import './media/react.svg'
+import './media/nodejs.svg'
+
 const App = () => (
   <div>
     <p>

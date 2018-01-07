@@ -28,15 +28,7 @@ module.exports = env => {
         {
           test: /\.jsx?$/,
           include: resolve('src'),
-          use: [
-            { loader: 'babel-loader' },
-            {
-              loader: 'svg-symbol-sprite-loader',
-              options: {
-                importPath: './media',
-              },
-            },
-          ],
+          use: [{ loader: 'babel-loader' }],
         },
       ],
     },
@@ -49,6 +41,8 @@ module.exports = env => {
 
       // Generates index.html and injects script and style tags
       new HtmlWebpackPlugin({
+        minify: false,
+        title: 'SVG Symbol Sprite Loader Basic',
         template: resolve('public', 'index.html'),
       }),
     ],

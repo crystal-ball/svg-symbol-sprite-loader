@@ -5,6 +5,6 @@ import localStorageSVGLoader from 'svg-symbol-sprite-loader/src/local-storage-sv
 
 import App from './App'
 
-localStorageSVGLoader(window.SVG_SYMBOL_SPRITE_ID)
+localStorageSVGLoader(window.webpackManifest['icon-sprite.svg'])
 
 ReactDOM.render(<App />, document.getElementById('root'))
