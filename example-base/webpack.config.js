@@ -5,12 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = env => {
   const configs = {
     entry: {
-      app: resolve('src', 'index.jsx'),
+      app: [resolve('src/index.jsx')],
     },
 
     output: {
       path: resolve('build'),
-      filename: '[name].[chunkhash].js',
+      filename: '[name].js',
     },
 
     resolve: {
@@ -42,13 +42,9 @@ module.exports = env => {
     },
 
     plugins: [
-      // Plugin for SVG symbol sprite extracts imported SVGs into a file
-      // ⚠️ Plugin order matters! This plugin and the WebpackManifestPlugin/
-      // InlineChunkManifestHtmlWebpackPlugin hook into the compiler 'emit' event.
-      // This plugin must run first so that the generated sprite can be added to the
-      // build chunks before the manifest plugin checks what chunks are in the build!
+      // Extracts the imported SVGs into a separate sprite file
       new SVGSymbolSpritePlugin({
-        filename: 'icon-sprite.[hash:8].svg',
+        filename: 'icon-sprite.svg',
       }),
 
       // Generates index.html and injects script and style tags

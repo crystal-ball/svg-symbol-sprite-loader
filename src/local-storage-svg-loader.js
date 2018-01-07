@@ -5,7 +5,7 @@ const { localStorage } = window
  * Function uses a spritePath as a unique identifier for fetching and caching an
  * SVG sprite in local storage.
  */
-export default spritePath => {
+module.exports = spritePath => {
   // If you're in the <5% without local storage, I'm sorry
   if (!localStorage || !localStorage.getItem) return
 

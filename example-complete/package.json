@@ -1,0 +1,25 @@
+{
+  "name": "complete-feature-set-example-configuration",
+  "version": "0.0.0",
+  "description": "Demo configurations for using the complete feature set",
+  "scripts": {
+    "start": "webpack-dev-server --env=development --progress",
+    "build": "NODE_ENV=production webpack --env=production --progress"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^2.30.1",
+    "svg-symbol-sprite-loader": "^0.2.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  }
+}

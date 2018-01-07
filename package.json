@@ -7,7 +7,8 @@
     "commit": "git cz",
     "test": "npm run lint && jest",
     "prepush": "npm test",
-    "container": "docker-compose run --service-ports --rm svg",
+    "container:base": "docker-compose run --service-ports --rm svg-base",
+    "container:complete": "docker-compose run --service-ports --rm svg-complete",
     "test:unit": "jest",
     "format": "prettier --write src/*.js",
     "lint": "cross-env NODE_ENV=test eslint src/*"
@@ -31,7 +32,8 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "loader-utils": "^1.1.0"
+    "loader-utils": "^1.1.0",
+    "webpack-sources": "^1.1.0"
   },
   "devDependencies": {
     "@crystal-ball/eslint-config-eloquence": "^6.2.0",

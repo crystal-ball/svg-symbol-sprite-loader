@@ -1,5 +1,6 @@
 const { interpolateName } = require('loader-utils')
-const Chunk = require('webpack/lib/Chunk')
+// const Chunk = require('webpack/lib/Chunk')
+// const { ConcatSource } = require('webpack-sources')
 
 const SpriteStore = require('./sprite-store')
 
@@ -32,12 +33,18 @@ module.exports = class SVGSymbolSpritePlugin {
       {
         /** The `filename` defines the name of the emitted asset */
         filename: 'icon-sprite.svg',
-        /** The `chunkName` defintes the name of the manifest entry */
-        chunkName: 'icon-sprite',
+        /** The `chunkName` defines the name of the manifest entry */
+        // chunkName: 'icon-sprite',
+        /**
+         * Identifier for the chunk that the global sprite id assignment source
+         * should be injected into. If an identifier isn't specified, the id assignment
+         * is not injected.
+         */
+        // spriteIdInjectionChunk: '',
         /** When true, inject a chunk into webpack chunks */
-        injectChunk: false,
+        // injectChunk: false,
         /** When true, inject `SVG_SYMBOL_SPRITE_ID` into `window` */
-        injectSpriteId: true,
+        // injectSpriteId: true,
       },
       options,
     )
@@ -49,24 +56,40 @@ module.exports = class SVGSymbolSpritePlugin {
    */
   apply(compiler) {
     /* eslint-disable no-param-reassign */
-    const { filename, chunkName } = this.options
+    const { filename } = this.options
 
     compiler.plugin('this-compilation', compilation => {
-      compilation.plugin('additional-assets', callback => {
-        // Generate interpolated name with content source for hashing
-        const content = getSpriteContent()
-        const resourcePath = interpolateName({}, filename, { content })
+      // During chunk asset optimization, if plugin is configured to inject the
+      // generated sprite id, add the code to attach id to window
+      // compilation.plugin('optimize-chunk-assets', (chunks, callback) => {
+      //   chunks.forEach(chunk => {
+      //     chunk.files.forEach(file => {
+      //       if (!spriteIdInjectionChunk) return
+      //       if (!file.match(spriteIdInjectionChunk)) return
 
-        // This plugin purposely does not handle fetching the generated sprite.
-        // Instead we ensure that our emitted file is included in the build manifest
-        // and allow consumer to decide how to fetch+cache sprite.
-        // The manifest will not include the file unless it has a corresponding
-        // 'chunk' to reference so we create a chunk and include the sprite as a file
-        // in the chunk.
-        const svgChunk = new Chunk(chunkName)
-        svgChunk.ids = []
-        svgChunk.files.push(resourcePath)
-        compilation.chunks.push(svgChunk)
+      //       const content = getSpriteContent()
+      //       const resourcePath = interpolateName({}, filename, { content })
+
+      //       // Rewrite the file using concat to append id injection code
+      //       compilation.assets[file] = new ConcatSource(
+      //         '/* Begin asset id injected by svg-symbol-sprite-loader plugin ---*/\n',
+      //         `;(function(){ window.SVG_SYMBOL_SPRITE_ID = "${resourcePath}" }());\n`,
+      //         '/* End asset id injection ---------------------------------------*/\n',
+      //         compilation.assets[file],
+      //       )
+      //     })
+      //   })
+      //   callback()
+      // })
+
+      // During the additional assets compilation hook, generate the sprite content
+      // and append it to the compilation assets.
+      // ℹ️ This is where the sprite file is created
+      compilation.plugin('additional-assets', callback => {
+        // Create sprite content
+        const content = getSpriteContent()
+        // Use interpolateName to allow for file name hashing based on content
+        const resourcePath = interpolateName({}, filename, { content })
 
         compilation.assets[resourcePath] = {
           source() {
@@ -75,31 +98,13 @@ module.exports = class SVGSymbolSpritePlugin {
           size() {
             return content.length
           },
+          // name: chunkName,
+          // path: resourcePath,
+          // chunks: [0], // HACK to get included by manifest plugin?
         }
 
-        callback() // We're done 🎉
+        callback()
       })
-
-      compilation.plugin(
-        'html-webpack-plugin-alter-asset-tags',
-        (htmlPluginData, callback) => {
-          // Generate interpolated name with content source for hashing
-          const content = getSpriteContent()
-          const resourcePath = interpolateName({}, filename, { content })
-
-          // Add script tag with hashed resource id
-          htmlPluginData.head.push({
-            tagName: 'script',
-            closeTag: true,
-            attributes: {
-              type: 'text/javascript',
-            },
-            innerHTML: `window.SVG_SYMBOL_SPRITE_ID = "${resourcePath}"`,
-          })
-
-          callback(null, htmlPluginData) // We're done 🎉
-        },
-      )
     })
   }
 }

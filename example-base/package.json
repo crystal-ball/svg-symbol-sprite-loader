@@ -1,7 +1,7 @@
 {
-  "name": "demo-svg-symbol-sprite-loader",
+  "name": "base-feature-set-example-configuration",
   "version": "0.0.0",
-  "description": "Demo configurations for using the ultimate system 🎉",
+  "description": "Demo configurations for using the base feature set",
   "scripts": {
     "start": "webpack-dev-server --env=development --progress",
     "build": "NODE_ENV=production webpack --env=production --progress"

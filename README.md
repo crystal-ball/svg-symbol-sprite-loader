@@ -1,4 +1,4 @@
-<h1 align="center">SVG Symbol Sprite Loader</h1>
+<h1 align="center">Ultimate SVG Icon System 🎉</h1>
 
 <p align="center">
   <a href="https://github.com/prettier/prettier">
@@ -12,26 +12,27 @@
   </a>
 </p>
 
-This webpack loader aggregates imported SVGs into a separate `<symbol>` sprite
-file. An svg symbol sprite is very effective for creating an icon system, and
-using a loader to bundle imported SVGs makes it simple to dynamically create a
-sprite that only includes SVGs used in your application 🎉.
+This project provides a set of utilities for efficiently creating a fully
+featured SVG icon system within a React+webpack project. The included loader and
+plugin can be used to automatically generate an SVG symbol sprite from _only_
+the SVG icons you use in your project.
 
-This repository includes an **optional** `local-storage-svg-loader.js` that will
-fetch an SVG sprite at the configured url and save it to local storage using the
-url as an id. On subsequent visits to your application if the sprite id hasn't
-changed the sprite will be served from local storage.
+<ul>
+  <li><a href="#base">Base feature set configuration guide</a></li>
+  <li><a href="#complete">⭐️ Complete feature set configuration guide</a></li>
+  <li><a href="#system">ℹ️ SVG icon system details and motivations</a></li>
+</ul>
 
-<div>
-  <em>
-    Repo icon made by
-    <a href="https://www.flaticon.com/authors/smartline" title="Smartline">Smartline
-    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com
-    </a> is licensed by
-    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">
-    CC 3.0 BY</a>
-  </em>
-</div>
+### Included utiltiies
+
+1. webpack loader `svg-symbol-sprite-loader` that allows importing SVG files
+   into a webpack project.
+1. webpack plugin that aggregates the imported SVGs into a separate `<symbol>`
+   sprite file and emits it as a build asset.
+1. _Optional_ `local-storage-svg-loader.js` that will fetch an SVG sprite and
+   save it to local storage using the asset id. On subsequent visits to your
+   application if the sprite id hasn't changed the sprite will be served from
+   local storage.
 
 ## Install
 
@@ -39,16 +40,14 @@ changed the sprite will be served from local storage.
 npm install svg-symbol-sprite-loader
 ```
 
-## Configure
+<h2 id="base">Base feature set configuration guide</h2>
 
 ⚠️ The below example covers the bare minimum configuration required to generate
-an `icon-sprite.svg` file at your build output destination. It does not
-configure your application to consume the sprite.
-
-✅ See the `/example` directory for a real world usage example that generates a
-hashed file for cache busting that is fetched+stored in local storage.
+an `icon-sprite.svg` file. The filename is not hashed, and you would need to
+manually change the filename whenever you want to bust the cached sprite.
 
 ```javascript
+// webpack.config.js
 const SVGSymbolSpritePlugin = require('svg-symbol-sprite-loader/src/plugin')
 
 module.exports = {
@@ -66,11 +65,33 @@ module.exports = {
   plugins: [
     // The plugin generates the sprite asset and injects it into the webpack output
     new SVGSymbolSpritePlugin({
-      filename: 'icon-sprite.svg',
+      filename: 'icon-sprite-01.svg',
     }),
   ],
 }
 ```
+
+And in your application, use the local storage sprite loader with the filename.
+
+```javascript
+import iconSpriteLoader from 'svg-symbol-sprite-loader/sprite-loader'
+
+iconSpriteLoader('icon-sprite-01.svg')
+
+// ... somewhere in your applicaiton
+import './media/icon.svg'
+import './media/another-icon.svg'
+```
+
+<h2 id="complete">⭐️ Complete feature set configuration guide</h2>
+
+COMING SOON...
+
+<h2 id="system">ℹ️ SVG icon system details and motivations</h2>
+
+* An svg symbol sprite is very effective for creating an icon system. It allows
+  you to reference an svg by id without including viewbox attributes.
+* Caching in local storage is performant and reduces occurences of icon flash
 
 ## Contributing 😃
 
@@ -80,7 +101,28 @@ All contributions are greatly appreciated 👍🎉. To contribute please:
 * Review the [Contributing Guide][contributing] for a helpful code overview and
   repository pull request process details.
 
+## Thank You 🙏
+
+<div>
+  <em>
+    Repo icon made by
+    <a href="https://www.flaticon.com/authors/smartline" title="Smartline">Smartline
+    </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com
+    </a> is licensed by
+    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">
+    CC 3.0 BY</a>
+  </em>
+</div>
+
 <!-- Links -->
 
 [conduct]: ./CODE_OF_CONDUCT.md
 [contributing]: ./CONTRIBUTING.md
+
+## TODO:
+
+* Is adding chunks to the asset successful in getting it added to the manifest?
+  If so, is it ok to use chunk 0?
+* If chunks adds to manifest, include example with using the
+  local-storage-loader with the manifest entry
+* Allow for configuring componentMatch for multiple icon sources
