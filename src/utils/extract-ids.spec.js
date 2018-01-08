@@ -19,7 +19,10 @@ const App = () => (
 export default App`
 
 test('appends an import for every component instance', () => {
-  const result = extractIds(source, { importPath: 'media/icons' })
+  const result = extractIds(source, {
+    importPath: 'media/icons',
+    componentName: 'Icon',
+  })
 
   expect(result.includes("import 'media/icons/javascript.svg'")).toBeTruthy()
   expect(result.includes("import 'media/icons/react.svg'")).toBeTruthy()
@@ -41,7 +44,10 @@ const App = () => (
 )
 
 export default App`
-  const result = extractIds(noIconSource, { importPath: 'media/icons' })
+  const result = extractIds(noIconSource, {
+    importPath: 'media/icons',
+    componentName: 'Icon',
+  })
 
   expect(result).toBe(result)
 })

@@ -18,21 +18,9 @@ plugin can be used to automatically generate an SVG symbol sprite from _only_
 the SVG icons you use in your project.
 
 <ul>
-  <li><a href="#base">Base feature set configuration guide</a></li>
   <li><a href="#complete">⭐️ Complete feature set configuration guide</a></li>
   <li><a href="#system">ℹ️ SVG icon system details and motivations</a></li>
 </ul>
-
-### Included utiltiies
-
-1. webpack loader `svg-symbol-sprite-loader` that allows importing SVG files
-   into a webpack project.
-1. webpack plugin that aggregates the imported SVGs into a separate `<symbol>`
-   sprite file and emits it as a build asset.
-1. _Optional_ `local-storage-svg-loader.js` that will fetch an SVG sprite and
-   save it to local storage using the asset id. On subsequent visits to your
-   application if the sprite id hasn't changed the sprite will be served from
-   local storage.
 
 ## Install
 
@@ -40,17 +28,35 @@ the SVG icons you use in your project.
 npm install svg-symbol-sprite-loader
 ```
 
-<h2 id="base">Base feature set configuration guide</h2>
+<h2 id="complete">⭐️ Complete feature set configuration guide</h2>
 
-⚠️ The below example covers the bare minimum configuration required to generate
-an `icon-sprite.svg` file. The filename is not hashed, and you would need to
-manually change the filename whenever you want to bust the cached sprite.
+The _ultimate_ SVG icon system follows this workflow:
+
+1. The `svg-symbol-sprite-loader` allows importing svg icon files into your
+   application.
+1. The loader coordinates with the package plugin to aggregate, dedupe and order
+   imported icons for consisten sprite contents. At the end of your build this
+   sprite is hashed for cache busting and emitted as an asset.
+1. The hashed sprite filename is included in your build manifest, this is used
+   to check if the sprite contents have been changed. If the sprite contents are
+   the same they are loaded from local storage.
+1. If the sprite contents have changed the `local-storage-loader` fetches the
+   latest sprite and caches it in local storage.
+1. Your sprite is injected into the page, allowing you to easily use ids to
+   reference your icons anywhere 🎉
+
+<h4 align="center">1. Configure - webpack.config.js</h4>
 
 ```javascript
-// webpack.config.js
 const SVGSymbolSpritePlugin = require('svg-symbol-sprite-loader/src/plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
+const InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html-webpack-plugin')
 
 module.exports = {
+
+  // ...
+
   module: {
     rules: [
       {
@@ -59,33 +65,52 @@ module.exports = {
         test: /\.svg$/,
         use: [{ loader: 'svg-symbol-sprite-loader' }],
       },
+      // ...
     ],
   },
 
-  plugins: [
-    // The plugin generates the sprite asset and injects it into the webpack output
-    new SVGSymbolSpritePlugin({
-      filename: 'icon-sprite-01.svg',
-    }),
-  ],
+    plugins: [
+      // Extracts the imported SVGs into a separate sprite file
+      new SVGSymbolSpritePlugin({
+        filename: 'icon-sprite.[chunkhash].svg',
+      }),
+
+      // Extract the webpack manifest into a separate JSON file
+      new ManifestPlugin(),
+
+      // Inline the manifest JSON file into index head
+      new InlineChunkManifestHtmlWebpackPlugin(),
+
+      // Generates index.html and injects script and style tags
+      new HtmlWebpackPlugin(),
+    ],
+  }
 }
 ```
 
-And in your application, use the local storage sprite loader with the filename.
+<h4 align="center">2. Fetch - index.js</h4>
 
 ```javascript
-import iconSpriteLoader from 'svg-symbol-sprite-loader/sprite-loader'
+import localStorageLoader from 'svg-symbol-sprite-loader/local-storage-loader'
 
-iconSpriteLoader('icon-sprite-01.svg')
-
-// ... somewhere in your applicaiton
-import './media/icon.svg'
-import './media/another-icon.svg'
+// Call the local storage loader with the cached asset id from the manifest
+localStorageLoader(window.webpackManifest['icon-sprite.svg'])
 ```
 
-<h2 id="complete">⭐️ Complete feature set configuration guide</h2>
+<h4 align="center">3. Import - component.jsx</h4>
 
-COMING SOON...
+```javascript
+import './media/icon-one.svg'
+
+  // ...
+
+  <svg>
+    <use href="icon-one">
+  </svg>
+```
+
+_For a basic example of using the loader to generate a sprite see the
+[Base feature set configuration guide](./example-base/README.md)_
 
 <h2 id="system">ℹ️ SVG icon system details and motivations</h2>
 
@@ -118,11 +143,3 @@ All contributions are greatly appreciated 👍🎉. To contribute please:
 
 [conduct]: ./CODE_OF_CONDUCT.md
 [contributing]: ./CONTRIBUTING.md
-
-## TODO:
-
-* Is adding chunks to the asset successful in getting it added to the manifest?
-  If so, is it ok to use chunk 0?
-* If chunks adds to manifest, include example with using the
-  local-storage-loader with the manifest entry
-* Allow for configuring componentMatch for multiple icon sources
