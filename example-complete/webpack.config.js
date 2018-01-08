@@ -17,6 +17,7 @@ module.exports = env => {
 
     resolve: {
       extensions: ['.js', '.jsx', '.json'],
+      modules: [resolve('node_modules'), resolve('src')],
     },
 
     module: {
@@ -35,7 +36,15 @@ module.exports = env => {
             {
               loader: 'svg-symbol-sprite-loader',
               options: {
-                importPath: './media',
+                componentName: 'Icon',
+                importPath: 'media',
+              },
+            },
+            {
+              loader: 'svg-symbol-sprite-loader',
+              options: {
+                componentName: 'Ionicon',
+                importPath: 'ionicons/dist/svg',
               },
             },
           ],

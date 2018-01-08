@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Icon from './Icon'
+import Ionicon from './Ionicon'
 
 const App = () => (
   <div>
@@ -12,6 +13,11 @@ const App = () => (
       <Icon id="javascript" />
       <Icon id="react" />
       <Icon id="nodejs" />
+    </div>
+    <p>Some Devicons</p>
+    <div>
+      <Ionicon id="ios-analytics" />
+      <Ionicon id="ios-alert" />
     </div>
   </div>
 )

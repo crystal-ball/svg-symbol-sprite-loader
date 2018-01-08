@@ -1,6 +1,5 @@
 const { interpolateName } = require('loader-utils')
 const Chunk = require('webpack/lib/Chunk')
-// const { ConcatSource } = require('webpack-sources')
 
 const SpriteStore = require('./sprite-store')
 

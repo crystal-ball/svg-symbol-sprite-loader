@@ -1,7 +1,12 @@
-module.exports = function extractIds(source, opts) {
+/**
+ * @param {string} source Source file contents
+ * @param {Object} options Loader options
+ */
+module.exports = function extractIds(source, { importPath, componentName }) {
   const iconSet = new Set()
 
-  const componentInstances = source.match(/<Icon([^/>]*)\/>/g)
+  const componentRegexp = new RegExp(`<${componentName}([^/>]*)\\/>`, 'g')
+  const componentInstances = source.match(componentRegexp)
 
   // ⚠️ If the file doesn't have Icon components, bail out
   if (!componentInstances || !componentInstances.length) return source
@@ -14,8 +19,7 @@ module.exports = function extractIds(source, opts) {
   })
 
   return `${source}
-\n/* Imports injected by svg-symbol-sprite-loader */
-${[...iconSet]
-    .map(icon => `import '${opts.importPath}/${icon}.svg'`)
-    .join('\n')}`
+
+  /* Imports injected by svg-symbol-sprite-loader */
+${[...iconSet].map(icon => `import '${importPath}/${icon}.svg'`).join('\n')}`
 }
