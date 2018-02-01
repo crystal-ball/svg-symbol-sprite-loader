@@ -12,9 +12,12 @@ module.exports = function extractIds(source, { importPath, componentName }) {
   if (!componentInstances || !componentInstances.length) return source
 
   componentInstances.forEach(instance => {
-    const svgId = instance.match(/id=['|"]([^'"]*)['|"]/)
+    const svgId = instance.match(/id=['|"]([a-zA-z0-9/-]*)['|"]/)
 
-    if (!svgId.length) this.emitWarning('Component id missing')
+    // If no id is found, bail
+    if (!svgId || !svgId.length) return
+
+    // Add the found id to the set of imports
     iconSet.add(svgId[1])
   })
 
