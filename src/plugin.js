@@ -33,7 +33,7 @@ module.exports = class SVGSymbolSpritePlugin {
         /** The `filename` defines the name of the emitted asset */
         filename: 'icon-sprite.svg',
       },
-      options,
+      options
     )
 
     // loader-utils only supports [hash] interpolation

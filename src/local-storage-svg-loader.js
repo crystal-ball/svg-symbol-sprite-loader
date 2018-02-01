@@ -13,7 +13,7 @@ module.exports = spritePath => {
     // Current version is in localStorage, get it and inject it
     document.body.insertAdjacentHTML(
       'afterbegin',
-      localStorage.getItem('SVG_SPRITE_DATA'),
+      localStorage.getItem('SVG_SPRITE_DATA')
     )
   } else {
     fetch(spritePath)

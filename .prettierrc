@@ -1,6 +1,15 @@
 {
+  "printWidth": 84,
   "singleQuote": true,
   "semi": false,
-  "trailingComma": "all",
-  "proseWrap": "always"
+  "trailingComma": "es5",
+  "proseWrap": "always",
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "printWidth": 80
+      }
+    }
+  ]
 }

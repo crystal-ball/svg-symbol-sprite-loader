@@ -28,9 +28,7 @@ module.exports = class SpriteStore {
     const svgHTML = $svg.html()
     const viewBox = $svg.attr('viewBox')
 
-    this.icons[
-      id
-    ] = `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`
+    this.icons[id] = `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`
   }
   /**
    * Handle returning total set of SVGs as a single content string
