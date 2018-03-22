@@ -1,30 +1,14 @@
-const { interpolateName } = require('loader-utils')
 const Chunk = require('webpack/lib/Chunk')
 const { ConcatSource } = require('webpack-sources')
+const { interpolateName } = require('loader-utils')
 
-const SpriteStore = require('./sprite-store')
-
-// Class acts as the store for imported SVGs
-const spriteStore = new SpriteStore()
-
-const getSpriteContent = () =>
-  `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${spriteStore.getSpriteContent()}</svg>`
+const spriteStore = require('./sprite-store')
 
 /**
- * The plugin handles:
- * 1. Merging plugin configuration with default configs
- * 1. Managing access to icon store
- * 1. Updating build chunks to update build manifest
- * 1. Inserting sprite file into build output assets
+ * The SVG symbol sprite plugin is responsible for generating the SVG sprite asset
+ * and including it in the compilation assets.
  */
 module.exports = class SVGSymbolSpritePlugin {
-  /**
-   * Method is statically available so loader can add each imported SVG to store
-   * without creating a plugin instance
-   */
-  static getStore() {
-    return spriteStore
-  }
   /**
    * Merge default options with plugin configuration
    */
@@ -38,12 +22,6 @@ module.exports = class SVGSymbolSpritePlugin {
       },
       options
     )
-
-    // loader-utils only supports [hash] interpolation
-    const { filename } = this.options
-    if (filename.includes('[chunkhash]')) {
-      this.options.filename = filename.replace('[chunkhash]', '[hash]')
-    }
   }
 
   /**
@@ -55,16 +33,24 @@ module.exports = class SVGSymbolSpritePlugin {
     const { filename } = this.options
     let resourcePath
 
-    compiler.hooks.compilation.tap('SVGSymbolSprite', compilation => {
-      // During the additional assets compilation hook, generate the sprite content
-      // and append it to the compilation assets.
-      // ℹ️ This is where the sprite file is created
+    // 🤔 The `compilation` hook is called twice and ends up producing an empty svg
+    // sprite. The `thisCompiliation` hook is only called once. This seems to be the
+    // correct hook to use ¯\_(ツ)_/¯
+    compiler.hooks.thisCompilation.tap('SVGSymbolSprite', compilation => {
+      // ℹ️ During additional assets hook, handle adding svg sprite to build assets
       compilation.hooks.additionalAssets.tapAsync('SVGSymbolSprite', callback => {
-        // compilation.plugin('additional-assets', callback => {
-        // Create sprite content
-        const content = getSpriteContent()
+        // Get sprite content returns full svg symbol sprite ready for application
+        const content = spriteStore.getSpriteContent()
+
         // Use interpolateName to allow for file name hashing based on content
-        resourcePath = interpolateName({}, filename, { content })
+        resourcePath = interpolateName(
+          {},
+          // loader-utils only supports [hash] interpolation, but that is confusing
+          // because most other webpack filenames use either chunkhash or more
+          // accurately in this case contenthash
+          filename.replace(/contenthash|chunkhash/, 'hash'),
+          { content }
+        )
 
         // 🤔 adding a chunk is required to get the emitted sprite included in the
         // manifest file. There may be a better way to handle this...
@@ -86,23 +72,33 @@ module.exports = class SVGSymbolSpritePlugin {
         callback()
       })
 
+      /*
+       * Unless disabled, walk through all of the generated chunk's files and if the
+       * icon-sprite-loader has been included replace the ICON_SPRITE_PATH_TARGET
+       * with the complete path to the generated sprite.
+       *
+       * 🤔 This is the hackiest part of this operation. Not sure if there is a
+       * "right" way to inject some value like this after the compilation...
+       */
       if (this.options.injectSpritePath) {
-        // Unless deactivated, look for JS assets with the constant target to inject
-        // the sprite path as a variable that can then be used in the
-        // icon-sprite-loader
         compilation.hooks.optimizeChunkAssets.tapAsync(
           'SVGSymbolSprite',
           (chunks, callback) => {
             chunks.forEach(chunk => {
               chunk.files.forEach(file => {
+                // Only replace value in js files that aren't sourcemaps
                 if (file.includes('.js') && !file.includes('.map')) {
                   const { publicPath } = compiler.options.output
                   const spritePath = `${publicPath || ''}${resourcePath}`
 
+                  // Use ConcatSource b/c it seems to be a legit webpack utility for
+                  // mutating sources that will hopefully ensure all of the required
+                  // info is preserved...
                   compilation.assets[file] = new ConcatSource(
-                    `/* ICON_SPRITE_PATH injected by svg-symbol-sprite plugin */\nconst ICON_SPRITE_PATH = "${spritePath}";`,
-                    '\n',
                     compilation.assets[file]
+                      .source()
+                      .replace('ICON_SPRITE_PATH_TARGET', spritePath),
+                    '\n'
                   )
                 }
               })

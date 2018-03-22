@@ -1,12 +1,13 @@
-/* global ICON_SPRITE_PATH */
 /* eslint-env browser */
 const { localStorage } = window
+
+const ICON_SPRITE_PATH = 'ICON_SPRITE_PATH_TARGET'
 
 /**
  * Function uses a sprite path as a unique identifier for fetching and caching an
  * SVG sprite in local storage.
  *
- * ℹ️ The ICON_SPRITE_PATH is injected during the plugin execution, it can be
+ * ℹ️ The ICON_SPRITE_PATH is replaced during the plugin execution, it can be
  * disabled by passing injectSpritePath false, but then this file will fail so don't
  * include it
  *

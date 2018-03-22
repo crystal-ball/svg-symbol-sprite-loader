@@ -9,7 +9,7 @@ const { interpolateName } = require('loader-utils')
  * When getting the icon set from the store the set is alphabetized (and inherently
  * unique) so that content hashes are not affected by import order.
  */
-module.exports = class SpriteStore {
+class SpriteStore {
   constructor() {
     this.icons = {}
   }
@@ -35,13 +35,21 @@ module.exports = class SpriteStore {
     return { id }
   }
   /**
-   * Handle returning total set of SVGs as a single content string
+   * Handle returning the complete SVG sprite content string with deduped, sorted
+   * icons inside.
+   * @return {string} SVG symbol sprite
    */
   getSpriteContent() {
     // Sort keys alphabetically before reducing content to ensure consistent hashes
     // for the same set of ideas (guarantee deterministic id order)
-    return Object.keys(this.icons)
+    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${Object.keys(
+      this.icons
+    )
       .sort()
-      .reduce((prev, curr) => prev + this.icons[curr], '')
+      .reduce((prev, curr) => prev + this.icons[curr], '')}</svg>`
   }
 }
+
+// Export singleton for use by loader and plugin. (If multiple sprites are needed
+// this class will need to be updated to store icons by a sprite namespace)
+module.exports = new SpriteStore()

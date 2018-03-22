@@ -1,21 +1,23 @@
-const plugin = require('./plugin')
+const { getOptions } = require('loader-utils')
+
 const extractIds = require('./utils/extract-ids')
+const spriteStore = require('./sprite-store')
 
 /**
  * The loader handles:
  * 1. Transforming each imported SVG into a valid JS export.
- * 1. Adding the imported SVG into the plugin store.
+ * 1. Adding the imported SVG into the sprite store.
  */
-module.exports = function loader(source) {
-  const { resourcePath, query = {} } = this
+module.exports = function svgSymbolSpriteLoader(source) {
+  const { resourcePath } = this
+  const options = getOptions(this)
 
   // Import path specifies that module imports should be injected by loader into
-  // source file
-  if (query.importPath) return extractIds(source, query)
+  // source file, THIS IS EXPERIMENTAL!
+  if (options && options.importPath) return extractIds(source, options)
 
-  // Add the SVG to the plugin store to be emitted in the sprite
-  const svgMeta = plugin.getStore().addSVG(resourcePath, source)
+  // Sprite store returns data about added sprite that we use as the JS export value
+  const svgData = spriteStore.addSVG(resourcePath, source)
 
-  // Return the SVG meta data
-  return `export default ${JSON.stringify(svgMeta)}`
+  return `export default ${JSON.stringify(svgData)}`
 }

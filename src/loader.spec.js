@@ -6,5 +6,5 @@ test('Inserts name and outputs JavaScript', async () => {
   const stats = await compiler('example.svg')
   const output = stats.toJson().modules[0].source
 
-  expect(output).toBe(`// empty (svg-symbol-sprite-loader)`)
+  expect(output).toBe(`export default ${JSON.stringify({ id: 'example' })}`)
 })

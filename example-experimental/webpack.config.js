@@ -57,7 +57,7 @@ module.exports = env => {
 
       // Extracts the imported SVGs into a separate sprite file
       new SVGSymbolSpritePlugin({
-        filename: 'icon-sprite.[chunkhash].svg',
+        filename: 'icon-sprite.[contenthash:10].svg',
       }),
     ],
   }
