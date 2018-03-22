@@ -1,5 +1,12 @@
 import React from 'react'
 
+import 'ionicons/dist/svg/ios-analytics.svg'
+import 'ionicons/dist/svg/ios-alert.svg'
+
+import './media/javascript.svg'
+import './media/react.svg'
+import './media/nodejs.svg'
+
 import Icon from './Icon'
 import Ionicon from './Ionicon'
 

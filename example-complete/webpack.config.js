@@ -6,18 +6,17 @@ const InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html
 
 module.exports = env => {
   const configs = {
-    entry: {
-      app: [resolve('src/index.jsx')],
-    },
+    mode: env,
 
-    output: {
-      path: resolve('build'),
-      filename: '[name].[chunkhash].js',
-    },
+    // output: {
+    //   path: resolve('dist'),
+    //   filename: '[name].[chunkhash].js',
+    //   publicPath: '/',
+    // },
 
     resolve: {
       extensions: ['.js', '.jsx', '.json'],
-      modules: [resolve('node_modules'), resolve('src')],
+      // modules: [resolve('node_modules'), resolve('src')],
     },
 
     module: {
@@ -31,44 +30,44 @@ module.exports = env => {
         {
           test: /\.jsx?$/,
           include: resolve('src'),
-          use: [
-            { loader: 'babel-loader' },
-            {
-              loader: 'svg-symbol-sprite-loader',
-              options: {
-                componentName: 'Icon',
-                importPath: 'media',
-              },
-            },
-            {
-              loader: 'svg-symbol-sprite-loader',
-              options: {
-                componentName: 'Ionicon',
-                importPath: 'ionicons/dist/svg',
-              },
-            },
-          ],
+          use: [{ loader: 'babel-loader' }],
+          // {
+          //   loader: 'svg-symbol-sprite-loader',
+          //   options: {
+          //     componentName: 'Icon',
+          //     importPath: 'media',
+          //   },
+          // },
+          // {
+          //   loader: 'svg-symbol-sprite-loader',
+          //   options: {
+          //     componentName: 'Ionicon',
+          //     importPath: 'ionicons/dist/svg',
+          //   },
+          // },
         },
       ],
     },
 
     plugins: [
-      // Extracts the imported SVGs into a separate sprite file
-      new SVGSymbolSpritePlugin({
-        filename: 'icon-sprite.[chunkhash].svg',
-      }),
-
       // Extract the webpack manifest into a separate JSON file
-      new ManifestPlugin(),
+      // new ManifestPlugin({
+      //   writeToFileEmit: true,
+      // }),
 
       // Inline the manifest JSON file into index head
-      new InlineChunkManifestHtmlWebpackPlugin(),
+      // new InlineChunkManifestHtmlWebpackPlugin(),
 
       // Generates index.html and injects script and style tags
       new HtmlWebpackPlugin({
         minify: false,
         title: 'SVG Symbol Sprite Loader Complete',
         template: resolve('public/index.html'),
+      }),
+
+      // Extracts the imported SVGs into a separate sprite file
+      new SVGSymbolSpritePlugin({
+        filename: 'icon-sprite.[chunkhash].svg',
       }),
     ],
   }

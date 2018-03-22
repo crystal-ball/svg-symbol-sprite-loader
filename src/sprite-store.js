@@ -17,6 +17,7 @@ module.exports = class SpriteStore {
    * Handle transforming SVG for use in a sprite and add to internal store
    * @param {string} resourcePath
    * @param {string} svg
+   * @return {Object} SVG meta data returned for loader including id
    */
   addSVG(resourcePath, svg) {
     // Use interpolate name to pull the file name out of the resource path and use
@@ -29,6 +30,9 @@ module.exports = class SpriteStore {
     const viewBox = $svg.attr('viewBox')
 
     this.icons[id] = `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`
+
+    // return the SVG meta, which currently is just id
+    return { id }
   }
   /**
    * Handle returning total set of SVGs as a single content string
