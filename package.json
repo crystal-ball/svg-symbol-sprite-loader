@@ -9,6 +9,7 @@
     "prepush": "npm test",
     "container:base": "docker-compose run --service-ports --rm svg-base",
     "container:complete": "docker-compose run --service-ports --rm svg-complete",
+    "container:experimental": "docker-compose run --service-ports --rm svg-experimental",
     "test:unit": "jest",
     "format": "prettier --write src/*.js",
     "lint": "cross-env NODE_ENV=test eslint src/*"

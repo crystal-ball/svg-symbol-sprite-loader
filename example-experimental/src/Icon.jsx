@@ -6,8 +6,8 @@ const propTypes = {
 }
 
 const Icon = ({ id }) => (
-  <svg>
-    <use xlinkHref={`#${id}`} href={`#${id}`} />
+  <svg className="icon">
+    <use href={`#${id}`} />
   </svg>
 )
 

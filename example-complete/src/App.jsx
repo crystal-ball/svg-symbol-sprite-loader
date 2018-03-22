@@ -1,30 +1,20 @@
 import React from 'react'
 
-import 'ionicons/dist/svg/ios-analytics.svg'
-import 'ionicons/dist/svg/ios-alert.svg'
+import Icon from './Icon'
 
 import './media/javascript.svg'
 import './media/react.svg'
 import './media/nodejs.svg'
 
-import Icon from './Icon'
-import Ionicon from './Ionicon'
-
 const App = () => (
   <div>
     <p>
-      This app will create a sprite of only the SVGs referenced by the Icon
-      component.
+      Only the icons imported by the app will be included in the final SVG sprite.
     </p>
     <div>
       <Icon id="javascript" />
       <Icon id="react" />
       <Icon id="nodejs" />
-    </div>
-    <p>Some Devicons</p>
-    <div>
-      <Ionicon id="ios-analytics" />
-      <Ionicon id="ios-alert" />
     </div>
   </div>
 )
