@@ -27,7 +27,15 @@ class SpriteStore {
     const $ = cheerio.load(svg)
     const $svg = $('svg')
     const svgHTML = $svg.html()
-    const viewBox = $svg.attr('viewBox')
+
+    // If a viewbox has not been defined on an SVG, use the width and height attrs
+    // to create one
+    let viewBox = $svg.attr('viewBox')
+    if (!viewBox) {
+      const width = $svg.attr('width')
+      const height = $svg.attr('height')
+      viewBox = `0 0 ${width} ${height}`
+    }
 
     this.icons[id] = `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`
 
