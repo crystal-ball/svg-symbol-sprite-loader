@@ -9,6 +9,7 @@
     "prepush": "npm test",
     "container:base": "docker-compose run --service-ports --rm svg-base",
     "container:complete": "docker-compose run --service-ports --rm svg-complete",
+    "container:experimental": "docker-compose run --service-ports --rm svg-experimental",
     "test:unit": "jest",
     "format": "prettier --write src/*.js",
     "lint": "cross-env NODE_ENV=test eslint src/*"
@@ -28,24 +29,25 @@
   },
   "license": "ISC",
   "peerDependencies": {
-    "webpack": "^3"
+    "webpack": "^3 || ^4"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "loader-utils": "^1.1.0"
+    "loader-utils": "^1.1.0",
+    "webpack-sources": "^1.1.0"
   },
   "devDependencies": {
-    "@crystal-ball/eslint-config-eloquence": "^6.2.0",
-    "babel-jest": "^21.2.0",
+    "@crystal-ball/eslint-config-eloquence": "^6.3.0",
+    "babel-jest": "^22.4.1",
     "babel-preset-env": "^1.6.1",
     "commitizen": "^2.9.6",
-    "cross-env": "^5.1.1",
+    "cross-env": "^5.1.4",
     "cz-customizable": "^5.2.0",
     "husky": "^0.14.3",
-    "jest": "^21.2.1",
+    "jest": "^22.4.2",
     "memory-fs": "^0.4.1",
-    "prettier": "^1.9.1",
-    "webpack": "^3.10.0"
+    "prettier": "^1.11.1",
+    "webpack": "^4.1.1"
   },
   "config": {
     "commitizen": {

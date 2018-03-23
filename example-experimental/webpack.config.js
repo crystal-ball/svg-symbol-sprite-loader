@@ -6,22 +6,43 @@ module.exports = env => {
   const configs = {
     mode: env,
 
+    output: {
+      path: resolve('dist'),
+      filename: '[name].[chunkhash].js',
+      publicPath: '/',
+    },
+
     resolve: {
       extensions: ['.js', '.jsx', '.json'],
+      modules: [resolve('node_modules'), resolve('src')],
     },
 
     module: {
       rules: [
         {
-          // The loader transforms imported SVGs into single line comments that will
-          // be stripped out during minification.
           test: /\.svg$/,
           use: [{ loader: 'svg-symbol-sprite-loader' }],
         },
         {
           test: /\.jsx?$/,
           include: resolve('src'),
-          use: [{ loader: 'babel-loader' }],
+          use: [
+            { loader: 'babel-loader' },
+            {
+              loader: 'svg-symbol-sprite-loader',
+              options: {
+                componentName: 'Icon',
+                importPath: 'media',
+              },
+            },
+            {
+              loader: 'svg-symbol-sprite-loader',
+              options: {
+                componentName: 'Ionicon',
+                importPath: 'ionicons/dist/svg',
+              },
+            },
+          ],
         },
       ],
     },

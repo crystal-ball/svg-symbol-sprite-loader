@@ -32,18 +32,18 @@ npm install svg-symbol-sprite-loader
 
 The _ultimate_ SVG icon system follows this workflow:
 
-1. The `svg-symbol-sprite-loader` allows importing svg icon files into your
-   application.
-1. The loader coordinates with the package plugin to aggregate, dedupe and order
-   imported icons for consisten sprite contents. At the end of your build this
-   sprite is hashed for cache busting and emitted as an asset.
-1. The hashed sprite filename is included in your build manifest, this is used
-   to check if the sprite contents have been changed. If the sprite contents are
-   the same they are loaded from local storage.
-1. If the sprite contents have changed the `local-storage-loader` fetches the
-   latest sprite and caches it in local storage.
-1. Your sprite is injected into the page, allowing you to easily use ids to
-   reference your icons anywhere 🎉
+1.  The `svg-symbol-sprite-loader` allows importing svg icon files into your
+    application.
+1.  The loader coordinates with the package plugin to aggregate, dedupe and
+    order imported icons for consisten sprite contents. At the end of your build
+    this sprite is hashed for cache busting and emitted as an asset.
+1.  The hashed sprite filename is included in your build manifest, this is used
+    to check if the sprite contents have been changed. If the sprite contents
+    are the same they are loaded from local storage.
+1.  If the sprite contents have changed the `local-storage-loader` fetches the
+    latest sprite and caches it in local storage.
+1.  Your sprite is injected into the page, allowing you to easily use ids to
+    reference your icons anywhere 🎉
 
 <h4 align="center">1. Configure - webpack.config.js</h4>
 
@@ -138,6 +138,8 @@ All contributions are greatly appreciated 👍🎉. To contribute please:
     CC 3.0 BY</a>
   </em>
 </div>
+
+https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/153
 
 <!-- Links -->
 

@@ -4,16 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = env => {
   const configs = {
-    entry: {
-      app: [resolve('src/index.jsx')],
-    },
-
-    output: {
-      path: resolve('build'),
-      filename: '[name].js',
-    },
+    mode: env,
 
     resolve: {
+      // Add .jsx file extensions to resolver
       extensions: ['.js', '.jsx', '.json'],
     },
 
@@ -34,16 +28,16 @@ module.exports = env => {
     },
 
     plugins: [
-      // Extracts the imported SVGs into a separate sprite file
-      new SVGSymbolSpritePlugin({
-        filename: 'icon-sprite.svg',
-      }),
-
       // Generates index.html and injects script and style tags
       new HtmlWebpackPlugin({
         minify: false,
         title: 'SVG Symbol Sprite Loader Basic',
         template: resolve('public', 'index.html'),
+      }),
+
+      // Extracts the imported SVGs into a separate sprite file
+      new SVGSymbolSpritePlugin({
+        filename: 'icon-sprite.svg',
       }),
     ],
   }
