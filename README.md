@@ -24,6 +24,8 @@ the SVG icons you use in your project.
 
 ## Install
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/crystal-ball/svg-symbol-sprite-loader.svg)](https://greenkeeper.io/)
+
 ```sh
 npm install svg-symbol-sprite-loader
 ```
