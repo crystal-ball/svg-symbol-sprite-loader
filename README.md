@@ -1,6 +1,9 @@
 <h1 align="center">Ultimate SVG Icon System 🎉</h1>
 
 <p align="center">
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/crystal-ball/svg-symbol-sprite-loader.svg" alt="Greenkeeper badge"/>
+  </a>
   <a href="https://github.com/prettier/prettier">
     <img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg" alt="Prettier">
   </a>
@@ -24,8 +27,6 @@ the SVG icons you use in your project.
 
 ## Install
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/crystal-ball/svg-symbol-sprite-loader.svg)](https://greenkeeper.io/)
-
 ```sh
 npm install svg-symbol-sprite-loader
 ```
@@ -39,21 +40,17 @@ The _ultimate_ SVG icon system follows this workflow:
 1.  The loader coordinates with the package plugin to aggregate, dedupe and
     order imported icons for consisten sprite contents. At the end of your build
     this sprite is hashed for cache busting and emitted as an asset.
-1.  The hashed sprite filename is included in your build manifest, this is used
-    to check if the sprite contents have been changed. If the sprite contents
-    are the same they are loaded from local storage.
-1.  If the sprite contents have changed the `local-storage-loader` fetches the
-    latest sprite and caches it in local storage.
-1.  Your sprite is injected into the page, allowing you to easily use ids to
-    reference your icons anywhere 🎉
+1.  The `icon-sprite-loader` can be imported into your application to fetch and
+    cache the sprite using a hashed filename. If the sprite contents change, the
+    filename will change and the sprite loader will fetch the latest sprite.
+1.  The sprite loader injects the sprite into the page, allowing you to easily
+    use ids to reference your icons anywhere 🎉
 
 <h4 align="center">1. Configure - webpack.config.js</h4>
 
 ```javascript
 const SVGSymbolSpritePlugin = require('svg-symbol-sprite-loader/src/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
-const InlineChunkManifestHtmlWebpackPlugin = require('inline-chunk-manifest-html-webpack-plugin')
 
 module.exports = {
 
@@ -62,8 +59,8 @@ module.exports = {
   module: {
     rules: [
       {
-        // The loader transforms imported SVGs into single line comments that will
-        // be stripped out during minification.
+        // The loader transforms imported SVGs in JS objects of SVG data that
+        // can be used with any icon component
         test: /\.svg$/,
         use: [{ loader: 'svg-symbol-sprite-loader' }],
       },
@@ -72,16 +69,10 @@ module.exports = {
   },
 
     plugins: [
-      // Extracts the imported SVGs into a separate sprite file
+      // The plugin extracts the imported SVGs into a separate sprite file
       new SVGSymbolSpritePlugin({
         filename: 'icon-sprite.[chunkhash].svg',
       }),
-
-      // Extract the webpack manifest into a separate JSON file
-      new ManifestPlugin(),
-
-      // Inline the manifest JSON file into index head
-      new InlineChunkManifestHtmlWebpackPlugin(),
 
       // Generates index.html and injects script and style tags
       new HtmlWebpackPlugin(),
@@ -93,10 +84,10 @@ module.exports = {
 <h4 align="center">2. Fetch - index.js</h4>
 
 ```javascript
-import localStorageLoader from 'svg-symbol-sprite-loader/local-storage-loader'
+import localStorageLoader from 'svg-symbol-sprite-loader/src/icon-sprite-loader'
 
-// Call the local storage loader with the cached asset id from the manifest
-localStorageLoader(window.webpackManifest['icon-sprite.svg'])
+// Call the sprite loader to fetch and cache the latest SVG sprite.
+localStorageLoader()
 ```
 
 <h4 align="center">3. Import - component.jsx</h4>
@@ -110,9 +101,6 @@ import './media/icon-one.svg'
     <use href="icon-one">
   </svg>
 ```
-
-_For a basic example of using the loader to generate a sprite see the
-[Base feature set configuration guide](./example-base/README.md)_
 
 <h2 id="system">ℹ️ SVG icon system details and motivations</h2>
 
