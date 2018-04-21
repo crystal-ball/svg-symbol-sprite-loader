@@ -2,7 +2,7 @@
   "name": "svg-symbol-sprite-loader",
   "version": "0.4.0",
   "description": "Loader and plugin for generating an SVG symbol sprite",
-  "main": "src/loader.js",
+  "main": "src/index.js",
   "scripts": {
     "commit": "git cz",
     "test": "npm run lint && jest",

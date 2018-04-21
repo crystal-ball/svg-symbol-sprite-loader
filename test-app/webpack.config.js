@@ -1,5 +1,5 @@
 const { resolve } = require('path')
-const SVGSymbolSpritePlugin = require('svg-symbol-sprite-loader/src/plugin')
+const SVGSymbolSprite = require('svg-symbol-sprite-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = env => {
@@ -33,7 +33,7 @@ module.exports = env => {
       }),
 
       // Extracts the imported SVGs into a separate sprite file
-      new SVGSymbolSpritePlugin({
+      new SVGSymbolSprite.Plugin({
         filename: 'icon-sprite.[contenthash:10].svg',
       }),
     ],
