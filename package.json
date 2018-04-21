@@ -31,8 +31,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "loader-utils": "^1.1.0",
-    "webpack-sources": "^1.1.0"
+    "loader-utils": "^1.1.0"
   },
   "devDependencies": {
     "@crystal-ball/eslint-config-eloquence": "^6.3.0",
@@ -44,8 +43,8 @@
     "husky": "^0.14.3",
     "jest": "^22.4.2",
     "memory-fs": "^0.4.1",
-    "prettier": "^1.11.1",
-    "webpack": "^4.1.1"
+    "prettier": "^1.12.1",
+    "webpack": "^4.6.0"
   },
   "config": {
     "commitizen": {
