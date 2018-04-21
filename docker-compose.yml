@@ -1,35 +1,14 @@
 version: '3'
 services:
-  svg-base:
+  test-app:
     build:
       context: .
-      dockerfile: ./example-base/Dockerfile
+      dockerfile: ./test-app/Dockerfile
     ports:
       - '3000:3000'
       - '5000:5000'
     volumes:
       - './src:/usr/src/app/node_modules/svg-symbol-sprite-loader/src'
-      - './example-base/webpack.config.js:/usr/src/app/webpack.config.js'
-    entrypoint: /bin/sh
-  svg-complete:
-    build:
-      context: .
-      dockerfile: ./example-complete/Dockerfile
-    ports:
-      - '3000:3000'
-      - '5000:5000'
-    volumes:
-      - './src:/usr/src/app/node_modules/svg-symbol-sprite-loader/src'
-      - './example-complete/webpack.config.js:/usr/src/app/webpack.config.js'
-    entrypoint: /bin/sh
-  svg-experimental:
-    build:
-      context: .
-      dockerfile: ./example-experimental/Dockerfile
-    ports:
-      - '3000:3000'
-      - '5000:5000'
-    volumes:
-      - './src:/usr/src/app/node_modules/svg-symbol-sprite-loader/src'
-      - './example-experimental/webpack.config.js:/usr/src/app/webpack.config.js'
+      - './test-app/src:/usr/src/app/src'
+      - './test-app/webpack.config.js:/usr/src/app/webpack.config.js'
     entrypoint: /bin/sh

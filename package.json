@@ -7,9 +7,7 @@
     "commit": "git cz",
     "test": "npm run lint && jest",
     "prepush": "npm test",
-    "container:base": "docker-compose run --service-ports --rm svg-base",
-    "container:complete": "docker-compose run --service-ports --rm svg-complete",
-    "container:experimental": "docker-compose run --service-ports --rm svg-experimental",
+    "container": "docker-compose run --service-ports --rm test-app",
     "test:unit": "jest",
     "format": "prettier --write src/*.js",
     "lint": "cross-env NODE_ENV=test eslint src/*"

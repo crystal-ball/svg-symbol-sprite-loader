@@ -13,8 +13,6 @@ module.exports = env => {
     module: {
       rules: [
         {
-          // The loader transforms imported SVGs into single line comments that will
-          // be stripped out during minification.
           test: /\.svg$/,
           use: [{ loader: 'svg-symbol-sprite-loader' }],
         },
