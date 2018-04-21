@@ -1,6 +1,3 @@
-const { getOptions } = require('loader-utils')
-
-const extractIds = require('./utils/extract-ids')
 const spriteStore = require('./sprite-store')
 
 /**
@@ -10,11 +7,6 @@ const spriteStore = require('./sprite-store')
  */
 module.exports = function svgSymbolSpriteLoader(source) {
   const { resourcePath } = this
-  const options = getOptions(this)
-
-  // Import path specifies that module imports should be injected by loader into
-  // source file, THIS IS EXPERIMENTAL!
-  if (options && options.importPath) return extractIds(source, options)
 
   // Sprite store returns data about added sprite that we use as the JS export value
   const svgData = spriteStore.addSVG(resourcePath, source)
