@@ -3,6 +3,7 @@
   "version": "0.4.0",
   "description": "Loader and plugin for generating an SVG symbol sprite",
   "main": "src/index.js",
+  "browser": "src/icon-sprite-loader.js",
   "scripts": {
     "commit": "git cz",
     "test": "npm run lint && jest",

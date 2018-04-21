@@ -28,7 +28,6 @@ module.exports = env => {
       // Generates index.html and injects script and style tags
       new HtmlWebpackPlugin({
         minify: false,
-        title: 'SVG Symbol Sprite Loader',
         template: resolve('public/index.html'),
       }),
 
