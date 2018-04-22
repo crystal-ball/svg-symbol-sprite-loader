@@ -11,7 +11,8 @@ const { interpolateName } = require('loader-utils')
  */
 class SpriteStore {
   constructor() {
-    this.icons = {}
+    // Why use a map??? JUST FOR FUN ¯\_(ツ)_/¯
+    this.icons = new Map()
   }
   /**
    * Handle transforming SVG for use in a sprite and add to internal store
@@ -37,7 +38,10 @@ class SpriteStore {
       viewBox = `0 0 ${width} ${height}`
     }
 
-    this.icons[id] = `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`
+    this.icons.set(
+      id,
+      `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`
+    )
 
     // return the SVG meta, which currently is just id
     return { id }
@@ -50,11 +54,14 @@ class SpriteStore {
   getSpriteContent() {
     // Sort keys alphabetically before reducing content to ensure consistent hashes
     // for the same set of ideas (guarantee deterministic id order)
-    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${Object.keys(
-      this.icons
-    )
-      .sort()
-      .reduce((prev, curr) => prev + this.icons[curr], '')}</svg>`
+    const sortedIcons = Array.from(this.icons.keys()).sort()
+
+    // Return svg with styles set to hide the svg, it isn't meant to be shown, the
+    // icons will reference the symbols inside the svg.
+    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${sortedIcons.reduce(
+      (prev, curr) => prev + this.icons.get(curr),
+      ''
+    )}</svg>`
   }
 }
 

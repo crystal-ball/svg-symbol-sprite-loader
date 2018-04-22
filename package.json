@@ -2,14 +2,13 @@
   "name": "svg-symbol-sprite-loader",
   "version": "0.4.0",
   "description": "Loader and plugin for generating an SVG symbol sprite",
-  "main": "src/loader.js",
+  "main": "src/index.js",
+  "browser": "src/icon-sprite-loader.js",
   "scripts": {
     "commit": "git cz",
     "test": "npm run lint && jest",
     "prepush": "npm test",
-    "container:base": "docker-compose run --service-ports --rm svg-base",
-    "container:complete": "docker-compose run --service-ports --rm svg-complete",
-    "container:experimental": "docker-compose run --service-ports --rm svg-experimental",
+    "container": "docker-compose run --service-ports --rm test-app",
     "test:unit": "jest",
     "format": "prettier --write src/*.js",
     "lint": "cross-env NODE_ENV=test eslint src/*"
@@ -33,8 +32,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "loader-utils": "^1.1.0",
-    "webpack-sources": "^1.1.0"
+    "loader-utils": "^1.1.0"
   },
   "devDependencies": {
     "@crystal-ball/eslint-config-eloquence": "^6.3.0",
@@ -46,8 +44,8 @@
     "husky": "^0.14.3",
     "jest": "^22.4.2",
     "memory-fs": "^0.4.1",
-    "prettier": "^1.11.1",
-    "webpack": "^4.1.1"
+    "prettier": "^1.12.1",
+    "webpack": "^4.6.0"
   },
   "config": {
     "commitizen": {

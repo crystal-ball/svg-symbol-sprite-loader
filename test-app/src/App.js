@@ -2,10 +2,6 @@ import React from 'react'
 
 import Icon from './Icon'
 
-import './media/javascript.svg'
-import './media/react.svg'
-import './media/nodejs.svg'
-
 const App = () => (
   <div>
     <p>
@@ -13,8 +9,8 @@ const App = () => (
     </p>
     <div>
       <Icon id="javascript" />
-      <Icon id="react" />
-      <Icon id="nodejs" />
+      <Icon id="bootstrap" />
+      <Icon id="nodejs" className="radical" />
     </div>
   </div>
 )

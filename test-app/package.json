@@ -1,7 +1,7 @@
 {
-  "name": "complete-feature-set-example-configuration",
+  "name": "test-app",
   "version": "0.0.0",
-  "description": "Demo configurations for using the complete feature set",
+  "description": "Demo application",
   "scripts": {
     "start": "webpack-dev-server --env=development --progress",
     "build": "NODE_ENV=production webpack --env=production --progress"

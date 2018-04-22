@@ -3,13 +3,5 @@
   "singleQuote": true,
   "semi": false,
   "trailingComma": "es5",
-  "proseWrap": "always",
-  "overrides": [
-    {
-      "files": "*.md",
-      "options": {
-        "printWidth": 80
-      }
-    }
-  ]
+  "proseWrap": "always"
 }
