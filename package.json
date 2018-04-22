@@ -1,6 +1,6 @@
 {
   "name": "svg-symbol-sprite-loader",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Loader and plugin for generating an SVG symbol sprite",
   "main": "src/index.js",
   "browser": "src/icon-sprite-loader.js",
