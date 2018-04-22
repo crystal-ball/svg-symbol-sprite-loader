@@ -15,11 +15,11 @@ module.exports = class SVGSymbolSpritePlugin {
     this.options = Object.assign(
       {
         /** The `filename` defines the name of the emitted asset */
-        filename: 'icon-sprite.svg',
+        filename: 'icon-sprite.[hash].svg',
         /** By default inject sprite id into head */
         injectSpriteId: true,
       },
-      options
+      options || {}
     )
   }
 
@@ -44,10 +44,19 @@ module.exports = class SVGSymbolSpritePlugin {
         // Use interpolateName to allow for file name hashing based on content
         resourcePath = interpolateName(
           {},
+          // CREATE A FILE NAME WITH HELLAS REGEX:
+          // 1. Normalize to [hash]
+          // 2. Inject default digest hash length if not there
           // loader-utils only supports [hash] interpolation, but that is confusing
           // because most other webpack filenames use either chunkhash or more
           // accurately in this case contenthash
-          filename.replace(/contenthash|chunkhash/, 'hash'),
+          filename.replace(/contenthash|chunkhash/, 'hash').replace(
+            // ℹ️ This will only match if a digest length hasn't been set
+            /\[hash\]/,
+            // Same as compilation.options.output.hashDigestLength ¯\_(ツ)_/¯
+            // see https://webpack.js.org/configuration/output/#output-hashdigestlength
+            `[hash:${compilation.outputOptions.hashDigestLength || 20}]`
+          ),
           { content }
         )
 

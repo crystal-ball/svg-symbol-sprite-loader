@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Icons from './Icons'
+import Icon from './Icon'
 
 const App = () => (
   <div>
@@ -8,9 +8,9 @@ const App = () => (
       Only the icons imported by the app will be included in the final SVG sprite.
     </p>
     <div>
-      <Icons.JavaScript />
-      <Icons.Bootstrap />
-      <Icons.NodeJS className="radical" />
+      <Icon id="javascript" />
+      <Icon id="bootstrap" />
+      <Icon id="nodejs" className="radical" />
     </div>
   </div>
 )

@@ -1,4 +1,15 @@
-<h1 align="center">Ultimate SVG Icon System 🎉</h1>
+<h1 align="center">
+  <img
+    src="https://cdn.rawgit.com/crystal-ball/svg-symbol-sprite-loader/master/icon.png"
+    role="presentation"
+    width="40"
+    height="40"
+  />
+  &nbsp;
+  SVG Symbol Sprite
+  <br/>
+  <small><em>Ultimate SVG Icon System</em></small>
+</h1>
 
 <p align="center">
   <a href="https://greenkeeper.io/">
@@ -15,14 +26,12 @@
   </a>
 </p>
 
-This project provides a set of utilities for efficiently creating a fully
-featured SVG icon system within a React+webpack project. The included loader and
-plugin can be used to automatically generate an SVG symbol sprite from _only_
-the SVG icons you use in your project.
+This project includes a webpack loader and plugin that can be used with the icon
+sprite loader to create a performant process for creating SVG sprites.
 
 <ul>
-  <li><a href="#complete">⭐️ Complete feature set configuration guide</a></li>
-  <li><a href="#system">ℹ️ SVG icon system details and motivations</a></li>
+  <li><a href="#complete">Configuration guide</a></li>
+  <li><a href="#system">SVG icon system motivation</a></li>
 </ul>
 
 ## Install
@@ -31,25 +40,24 @@ the SVG icons you use in your project.
 npm install svg-symbol-sprite-loader
 ```
 
-<h2 id="complete">⭐️ Complete feature set configuration guide</h2>
+<h2 id="complete">Configuration guide</h2>
 
 The _ultimate_ SVG icon system follows this workflow:
 
-1.  The `svg-symbol-sprite-loader` allows importing svg icon files into your
-    application.
-1.  The loader coordinates with the package plugin to aggregate, dedupe and
-    order imported icons for consisten sprite contents. At the end of your build
-    this sprite is hashed for cache busting and emitted as an asset.
-1.  The `icon-sprite-loader` can be imported into your application to fetch and
-    cache the sprite using a hashed filename. If the sprite contents change, the
-    filename will change and the sprite loader will fetch the latest sprite.
-1.  The sprite loader injects the sprite into the page, allowing you to easily
-    use ids to reference your icons anywhere 🎉
+1.  SVGs are imported into your application using the webpack loader, they can be
+    referenced by their ID.
+1.  The imported SVGs are deduped, sorted, hashed and extracted by the webpack
+    plugin.
+1.  The package exports a localstorage cache loader for browser bundles that will
+    import the emitted sprite. If the sprite contents change, the filename hash will
+    change and the sprite loader will fetch the latest sprite.
+
+_ℹ️ See the [test application](./test-app) for a complete application example_
 
 <h4 align="center">1. Configure - webpack.config.js</h4>
 
 ```javascript
-const SVGSymbolSpritePlugin = require('svg-symbol-sprite-loader/src/plugin')
+const SVGSymbolSprite = require('svg-symbol-sprite-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -67,46 +75,50 @@ module.exports = {
       // ...
     ],
   },
-
     plugins: [
-      // The plugin extracts the imported SVGs into a separate sprite file
-      new SVGSymbolSpritePlugin({
-        filename: 'icon-sprite.[chunkhash].svg',
-      }),
-
-      // Generates index.html and injects script and style tags
+      // The plugin will append a script with the sprite hash to head
+      // ⚠️ Order matters, the HTML plugin must be included before the SVG sprite
+      // plugin so that the HTML plugin hooks are registered!
       new HtmlWebpackPlugin(),
+
+      // The plugin extracts the imported SVGs into a separate sprite file,
+      // defaults to icon-sprite.[contenthash].svg
+      new new SVGSymbolSprite.Plugin(),
     ],
   }
 }
 ```
 
-<h4 align="center">2. Fetch - index.js</h4>
+<h4 align="center">2. Fetch - application source</h4>
 
 ```javascript
-import localStorageLoader from 'svg-symbol-sprite-loader/src/icon-sprite-loader'
+import svgSymbolSpriteLoader from 'svg-symbol-sprite-loader'
 
 // Call the sprite loader to fetch and cache the latest SVG sprite.
-localStorageLoader()
+svgSymbolSpriteLoader()
 ```
 
-<h4 align="center">3. Import - component.jsx</h4>
+<h4 align="center">3. Import - application source</h4>
 
 ```javascript
-import './media/icon-one.svg'
+import iconOne from './media/icon-one.svg'
 
   // ...
-
+export default () => (
   <svg>
-    <use href="icon-one">
+    <use href={`#${iconOne.id}`}>
   </svg>
+)
 ```
 
-<h2 id="system">ℹ️ SVG icon system details and motivations</h2>
+<h2 id="system">SVG icon system motivation</h2>
 
-* An svg symbol sprite is very effective for creating an icon system. It allows
-  you to reference an svg by id without including viewbox attributes.
-* Caching in local storage is performant and reduces occurences of icon flash
+* Sprite only the SVG icons imported into your application.
+* Use local storage to cache sprites by content hash and only fetch a sprite when
+  its content has changed.
+* Load sprites from CDN locations without the CORS issues of relative SVG imports.
+* Symbol sprites are very effective for creating an icon system. They allows svgs to
+  be referenced by id, and don't require including viewbox attributes.
 
 ## Contributing 😃
 
@@ -128,8 +140,6 @@ All contributions are greatly appreciated 👍🎉. To contribute please:
     CC 3.0 BY</a>
   </em>
 </div>
-
-https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/153
 
 <!-- Links -->
 
