@@ -8,4 +8,10 @@ install:
   - npm install
 
 script:
- - npm run test
+ - npm test
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - npx semantic-release

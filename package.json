@@ -1,6 +1,6 @@
 {
   "name": "svg-symbol-sprite-loader",
-  "version": "1.0.0",
+  "version": "0.0.0-semantic",
   "description": "Loader and plugin for generating an SVG symbol sprite",
   "main": "src/index.js",
   "browser": "src/icon-sprite-loader.js",
@@ -45,6 +45,7 @@
     "jest": "^22.4.2",
     "memory-fs": "^0.4.1",
     "prettier": "^1.12.1",
+    "semantic-release": "^15.3.1",
     "webpack": "^4.6.0"
   },
   "config": {
