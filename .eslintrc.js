@@ -2,7 +2,7 @@
 
 module.exports = {
   root: true,
-  extends: '@crystal-ball/eloquence/node',
+  extends: 'eloquence',
   rules: {
     // CHILL OUT ESLINT ITS A DEMO APP
     'import/no-unresolved': 'off',

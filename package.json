@@ -28,25 +28,25 @@
   },
   "license": "ISC",
   "peerDependencies": {
-    "webpack": "^3 || ^4"
+    "webpack": "4.x"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "loader-utils": "^1.1.0"
   },
   "devDependencies": {
-    "@crystal-ball/eslint-config-eloquence": "^6.3.0",
-    "babel-jest": "^22.4.1",
-    "babel-preset-env": "^1.6.1",
+    "babel-jest": "^22.4.4",
+    "babel-preset-env": "^1.7.0",
     "commitizen": "^2.9.6",
-    "cross-env": "^5.1.4",
+    "cross-env": "^5.1.6",
     "cz-customizable": "^5.2.0",
+    "eslint-config-eloquence": "^7.3.2",
     "husky": "^0.14.3",
-    "jest": "^22.4.2",
+    "jest": "^22.4.4",
     "memory-fs": "^0.4.1",
     "prettier": "^1.12.1",
-    "semantic-release": "^15.3.1",
-    "webpack": "^4.6.0"
+    "semantic-release": "^15.5.0",
+    "webpack": "^4.8.3"
   },
   "config": {
     "commitizen": {
