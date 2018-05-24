@@ -92,7 +92,8 @@ module.exports = class SVGSymbolSpritePlugin {
               tagName: 'script',
               closeTag: true,
               attributes: { type: 'text/javascript' },
-              innerHTML: `window.ICON_SPRITE_ID = "${resourcePath}";`,
+              innerHTML: `window.ICON_SPRITE_ID = "${compilation.outputOptions
+                .publicPath || ''}${resourcePath}";`,
             })
 
             cb(null, data)

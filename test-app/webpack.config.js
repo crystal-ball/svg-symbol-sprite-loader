@@ -4,6 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = env => ({
   mode: env,
+  output: {
+    publicPath: '/',
+  },
 
   module: {
     rules: [
