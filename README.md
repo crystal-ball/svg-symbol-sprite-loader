@@ -15,8 +15,8 @@
   <a href="https://www.npmjs.com/package/svg-symbol-sprite-loader">
     <img src="https://img.shields.io/npm/v/svg-symbol-sprite-loader.svg" alt="Module version">
   </a>
-  <a href=" https://travis-ci.com/crystal-ball/svg-symbol-sprite-loader">
-    <img src=" https://travis-ci.com/crystal-ball/svg-symbol-sprite-loader.svg?branch=master" alt="Build">
+  <a href="https://travis-ci.com/crystal-ball/svg-symbol-sprite-loader">
+    <img src="https://travis-ci.com/crystal-ball/svg-symbol-sprite-loader.svg?branch=master" alt="Build">
   </a>
   <a href="https://greenkeeper.io/" target="_blank" rel="noopener noreferrer">
     <img src="https://badges.greenkeeper.io/crystal-ball/svg-symbol-sprite-loader.svg" alt="Greenkeeper badge"/>
