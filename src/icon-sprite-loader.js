@@ -41,6 +41,7 @@ function iconSpriteLoader(customSpriteId) {
           localStorage.setItem('SVG_SPRITE_DATA', svgSprite)
         }
       })
+      // eslint-disable-next-line
       .catch(err => console.warn(`SVG sprite fetch failure: ${err.message}`))
   }
 }
