@@ -4,14 +4,9 @@
   "description": "Loader and plugin for generating an SVG symbol sprite",
   "main": "src/index.js",
   "browser": "src/icon-sprite-loader.js",
-  "scripts": {
-    "commit": "git cz",
-    "test": "npm run lint && jest",
-    "prepush": "npm test",
-    "container": "docker-compose run --service-ports --rm test-app",
-    "test:unit": "jest",
-    "format": "prettier --write src/*.js",
-    "lint": "cross-env NODE_ENV=test eslint src/*"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crystal-ball/svg-symbol-sprite-loader.git"
   },
   "keywords": [
     "webpack",
@@ -22,11 +17,16 @@
   "contributors": [
     "Dan Hedgecock <hedgecock.d@gmail.com> (https://danhedgecock.com)"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/crystal-ball/svg-symbol-sprite-loader.git"
-  },
   "license": "ISC",
+  "scripts": {
+    "commit": "git cz",
+    "test": "npm run lint && jest",
+    "prepush": "npm test",
+    "container": "docker-compose run --service-ports --rm test-app",
+    "test:unit": "jest",
+    "format": "prettier --write src/*.js",
+    "lint": "cross-env NODE_ENV=test eslint src/*"
+  },
   "peerDependencies": {
     "webpack": "4.x"
   },
