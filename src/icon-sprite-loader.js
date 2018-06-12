@@ -13,7 +13,7 @@ const { localStorage, ICON_SPRITE_ID } = window
  * ⚠️ Note that this process assumes fetch is available, so be sure to polyfill it
  * with whatwg-fetch if you support older browsers!
  */
-function iconSpriteLoader(customSpriteId) {
+function iconSpriteLoader({customSpriteId, fetchOptions}) {
   const spriteId = customSpriteId || ICON_SPRITE_ID
 
   if (
@@ -27,7 +27,7 @@ function iconSpriteLoader(customSpriteId) {
       localStorage.getItem('SVG_SPRITE_DATA')
     )
   } else {
-    fetch(spriteId)
+    fetch(spriteId, fetchOptions)
       .then(res => {
         if (!res.ok) throw new Error(res.statusText)
         return res
