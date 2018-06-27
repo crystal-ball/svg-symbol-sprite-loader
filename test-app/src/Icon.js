@@ -1,6 +1,12 @@
 // @flow
 import React from 'react'
 
+// Ionicons imports
+import doneAll from 'ionicons/dist/ionicons/svg/md-done-all.svg'
+import bonfire from 'ionicons/dist/ionicons/svg/md-bonfire.svg'
+import speedometer from 'ionicons/dist/ionicons/svg/md-speedometer.svg'
+
+// /media imports
 import javascript from './media/javascript.svg'
 import bootstrap from './media/bootstrap.svg'
 import nodejs from './media/nodejs.svg'
@@ -25,6 +31,9 @@ import nodejs from './media/nodejs.svg'
 // Map of imported icons simplifies warning when a component that hasn't been
 // imported is used in an app.
 const iconSet = {
+  'md-bonfire': bonfire,
+  'md-speedometer': speedometer,
+  'md-done-all': doneAll,
   javascript,
   bootstrap,
   nodejs,
@@ -32,7 +41,13 @@ const iconSet = {
 
 // Provide a typing for the component to make selecting the component id easier
 type props = {
-  id: 'javascript' | 'bootstrap' | 'nodejs',
+  id:
+    | 'md-bonfire'
+    | 'md-speedometer'
+    | 'md-done-all'
+    | 'javascript'
+    | 'bootstrap'
+    | 'nodejs',
   className?: string,
 }
 
