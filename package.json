@@ -40,7 +40,7 @@
     "commitizen": "^2.9.6",
     "cross-env": "^5.1.6",
     "cz-customizable": "^5.2.0",
-    "eslint-config-eloquence": "^7.3.2",
+    "eslint-config-eloquence": "^8.0.0",
     "husky": "^0.14.3",
     "jest": "^22.4.4",
     "memory-fs": "^0.4.1",
