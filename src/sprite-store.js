@@ -14,6 +14,7 @@ class SpriteStore {
     // Why use a map??? JUST FOR FUN ¯\_(ツ)_/¯
     this.icons = new Map()
   }
+
   /**
    * Handle transforming SVG for use in a sprite and add to internal store
    * @param {string} resourcePath
@@ -43,6 +44,7 @@ class SpriteStore {
     // return the SVG meta, which currently is just id
     return { id }
   }
+
   /**
    * Handle returning the complete SVG sprite content string with deduped, sorted
    * icons inside.

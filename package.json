@@ -35,18 +35,17 @@
     "loader-utils": "^1.1.0"
   },
   "devDependencies": {
-    "babel-jest": "^23.0.0",
     "babel-preset-env": "^1.7.0",
-    "commitizen": "^2.9.6",
-    "cross-env": "^5.1.6",
+    "commitizen": "^2.10.1",
+    "cross-env": "^5.2.0",
     "cz-customizable": "^5.2.0",
-    "eslint-config-eloquence": "^7.3.2",
+    "eslint-config-eloquence": "^8.0.0",
     "husky": "^0.14.3",
-    "jest": "^22.4.4",
+    "jest": "^23.2.0",
     "memory-fs": "^0.4.1",
     "prettier": "^1.13.6",
-    "semantic-release": "^15.5.0",
-    "webpack": "^4.8.3"
+    "semantic-release": "^15.6.0",
+    "webpack": "^4.12.2"
   },
   "config": {
     "commitizen": {

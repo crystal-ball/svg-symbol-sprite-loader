@@ -25,5 +25,5 @@ module.exports = {
 
   allowCustomScopes: true,
   allowBreakingChanges: ['feat', 'fix', 'style', 'refactor', 'perf', 'chore'],
-  scopes: [{ name: 'loader' }, { name: 'plugin' }, { name: 'example' }],
+  scopes: [{ name: 'loader' }, { name: 'plugin' }, { name: 'example' }, { name: 'deps' }],
 }
