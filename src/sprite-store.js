@@ -38,10 +38,7 @@ class SpriteStore {
       viewBox = `0 0 ${width} ${height}`
     }
 
-    this.icons.set(
-      id,
-      `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`
-    )
+    this.icons.set(id, `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`)
 
     // return the SVG meta, which currently is just id
     return { id }

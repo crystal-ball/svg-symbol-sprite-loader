@@ -1,7 +1,15 @@
 {
-  "printWidth": 84,
-  "singleQuote": true,
-  "semi": false,
-  "trailingComma": "es5",
-  "proseWrap": "always"
+  printWidth: 90,
+  proseWrap: 'always',
+  semi: false,
+  singleQuote: true,
+  trailingComma: 'es5',
+  overrides: [
+    {
+      files: '*.md',
+      options: {
+        printWidth: 80,
+      },
+    },
+  ],
 }
