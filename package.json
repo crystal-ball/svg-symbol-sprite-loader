@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
-    "commitizen": "^2.10.1",
+    "commitizen": "^3.0.0",
     "cross-env": "^5.2.0",
     "cz-customizable": "^5.2.0",
     "eslint-config-eloquence": "^8.0.0",
