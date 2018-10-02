@@ -18,5 +18,5 @@ module.exports = function svgSymbolSpriteLoader(source) {
   // module value, otherwise return raw data as export
   return options && options.loaderTemplate
     ? options.loaderTemplate(svgData)
-    : `export default ${JSON.stringify(svgData)}`
+    : `export default ${JSON.stringify(svgData)};`
 }
