@@ -10,13 +10,21 @@
 .eslintrc.js
 .prettierrc
 documentation.yml
+.dockerignore
+.prettierignore
+.travis.yml
+docker-compose.yml
 
 # Tests
 **/*.spec.js
 __mocks__
+jest.config.js
+test-app
 
 # Documentation
+icon.png
 docs
 guides
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
+.github
