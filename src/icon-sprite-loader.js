@@ -13,10 +13,11 @@ const { localStorage, ICON_SPRITE_ID } = window
  * ⚠️ Note that this process assumes fetch is available, so be sure to polyfill it
  * with whatwg-fetch if you support older browsers!
  */
-function iconSpriteLoader({ customSpriteId, fetchOptions } = {}) {
+function iconSpriteLoader({ customSpriteId, fetchOptions, useCache } = {}) {
   const spriteId = customSpriteId || ICON_SPRITE_ID
 
   if (
+    useCache &&
     localStorage &&
     localStorage.getItem &&
     localStorage.getItem('ICON_SPRITE_ID') === spriteId
