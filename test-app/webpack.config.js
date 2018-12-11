@@ -23,7 +23,7 @@ module.exports = env => ({
   },
 
   plugins: [
-    new HtmlWebpackPlugin({ template: resolve('public/index.html') }),
+    new HtmlWebpackPlugin({ template: resolve('src/index.html') }),
     new SVGSymbolSprite.Plugin(),
   ],
 
