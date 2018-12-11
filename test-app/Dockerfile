@@ -1,4 +1,4 @@
-FROM node:7.9-alpine as base
+FROM node:10.14-alpine as base
 LABEL maintainer="hedgecock.d@gmail.com"
 
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ RUN npm install -g serve
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY test-app/package*.json ./
-RUN npm install
+RUN npm ci
 
 # Bundle app source
 COPY test-app .

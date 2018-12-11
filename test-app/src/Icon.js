@@ -39,23 +39,11 @@ const iconSet = {
   nodejs,
 }
 
-// Provide a typing for the component to make selecting the component id easier
-type props = {
-  id:
-    | 'md-bonfire'
-    | 'md-speedometer'
-    | 'md-done-all'
-    | 'javascript'
-    | 'bootstrap'
-    | 'nodejs',
-  className?: string,
-}
-
 /**
  * Application icons component, note that VSCode includes links in docs, so you
  * could link to a page!
  */
-const Icon = ({ id, className }: props) => {
+const Icon = ({ id, className }) => {
   if (!iconSet[id]) console.warn('Invalid Icon: ', id)
 
   return (

@@ -11,5 +11,6 @@ services:
       - './package.json:/usr/src/app/node_modules/svg-symbol-sprite-loader/package.json'
       - './src:/usr/src/app/node_modules/svg-symbol-sprite-loader/src'
       - './test-app/src:/usr/src/app/src'
+      - './test-app/serve.json:/usr/src/app/serve.json'
       - './test-app/webpack.config.js:/usr/src/app/webpack.config.js'
     entrypoint: /bin/sh

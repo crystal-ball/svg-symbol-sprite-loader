@@ -51,7 +51,7 @@ The _ultimate_ SVG icon system follows this workflow:
     referenced by their ID.
 1.  The imported SVGs are deduped, sorted, hashed and extracted by the webpack
     plugin.
-1.  The package exports a localstorage cache loader for browser bundles that will
+1.  The package exports a localStorage cache loader for browser bundles that will
     import the emitted sprite. If the sprite contents change, the filename hash will
     change and the sprite loader will fetch the latest sprite.
 
@@ -85,8 +85,9 @@ module.exports = {
       new HtmlWebpackPlugin(),
 
       // The plugin extracts the imported SVGs into a separate sprite file,
-      // defaults to icon-sprite.[contenthash].svg
-      new new SVGSymbolSprite.Plugin(),
+      new new SVGSymbolSprite.Plugin({
+        filename: `icon-sprite${process.env.NODE_ENV === 'production' ? '.[chunkhash]' : ''}.svg`
+      }),
     ],
   }
 }
@@ -98,7 +99,7 @@ module.exports = {
 import svgSymbolSpriteLoader from 'svg-symbol-sprite-loader'
 
 // Call the sprite loader to fetch and cache the latest SVG sprite.
-svgSymbolSpriteLoader()
+svgSymbolSpriteLoader({ useCache: process.env.NODE_ENV === 'production' })
 ```
 
 <h4 align="center">3. Import - application source</h4>

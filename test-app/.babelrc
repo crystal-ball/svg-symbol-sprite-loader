@@ -1,12 +1,13 @@
 {
   presets: [
     [
-      'env',
+      '@babel/preset-env',
       {
         modules: false,
-        targets: { browsers: 'Chrome 65' },
+        targets: { browsers: 'Chrome 71' },
+        useBuiltIns: 'usage'
       },
     ],
-    'react',
+    '@babel/preset-react'
   ],
 }

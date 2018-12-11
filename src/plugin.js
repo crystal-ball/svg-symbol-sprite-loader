@@ -15,7 +15,7 @@ module.exports = class SVGSymbolSpritePlugin {
     this.options = Object.assign(
       {
         /** The `filename` defines the name of the emitted asset */
-        filename: 'icon-sprite.[hash].svg',
+        filename: 'icon-sprite.svg',
         /** By default inject sprite id into head */
         injectSpriteId: true,
       },
@@ -53,9 +53,8 @@ module.exports = class SVGSymbolSpritePlugin {
           filename.replace(/contenthash|chunkhash/, 'hash').replace(
             // ℹ️ This will only match if a digest length hasn't been set
             /\[hash\]/,
-            // Same as compilation.options.output.hashDigestLength ¯\_(ツ)_/¯
             // see https://webpack.js.org/configuration/output/#output-hashdigestlength
-            `[hash:${compilation.outputOptions.hashDigestLength || 20}]`
+            `[hash:${compilation.outputOptions.hashDigestLength}]`
           ),
           { content }
         )
