@@ -45,10 +45,11 @@ const iconSet = {
  */
 const Icon = ({ id, className }) => {
   if (!iconSet[id]) console.warn('Invalid Icon: ', id)
+  const { id: symbolId } = iconSet[id]
 
   return (
     <svg className={className}>
-      <use xlinkHref={`#${id}`} href={`#${id}`} />
+      <use xlinkHref={`#${symbolId}`} href={`#${symbolId}`} />
     </svg>
   )
 }
