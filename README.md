@@ -148,4 +148,4 @@ All contributions are greatly appreciated 👍🎉. To contribute please:
 <!-- Links -->
 
 [conduct]: ./CODE_OF_CONDUCT.md
-[contributing]: ./CONTRIBUTING.md
+[contributing]: ./.github/CONTRIBUTING.md

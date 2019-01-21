@@ -29,4 +29,4 @@ All contributions are greatly appreciated 👍🎉. This guide includes:
 
 <!-- Links -->
 
-[conduct]: './CODE_OF_CONDUCT.md'
+[conduct]: ../CODE_OF_CONDUCT.md
