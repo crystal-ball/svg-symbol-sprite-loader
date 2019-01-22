@@ -73,7 +73,17 @@ module.exports = {
         // The loader transforms imported SVGs in JS objects of SVG data that
         // can be used with any icon component
         test: /\.svg$/,
-        use: [{ loader: 'svg-symbol-sprite-loader' }],
+        use: [
+          {
+            loader: 'svg-symbol-sprite-loader',
+
+            // optional: Provide a function which returns a customized symbol ID.
+            // It receives the full file path as an argument
+            options: {
+              symbolId: filePath => `icon-${path.basename(filePath, '.svg')}`,
+            },
+          },
+        ],
       },
       // ...
     ],

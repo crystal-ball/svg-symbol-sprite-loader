@@ -17,6 +17,7 @@ export default (fixture, options = {}) => {
           test: /\.svg$/,
           use: {
             loader: path.resolve(__dirname, '../loader.js'),
+            options,
           },
         },
       ],

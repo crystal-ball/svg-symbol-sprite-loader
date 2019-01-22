@@ -1,5 +1,4 @@
 const cheerio = require('cheerio')
-const { interpolateName } = require('loader-utils')
 
 /**
  * The SpriteStore handles transforming and adding SVGs to an internal store by id.
@@ -19,13 +18,10 @@ class SpriteStore {
    * Handle transforming SVG for use in a sprite and add to internal store
    * @param {string} resourcePath
    * @param {string} svg
+   * @param {string} id
    * @return {Object} SVG meta data returned for loader including id
    */
-  addSVG(resourcePath, svg) {
-    // Use interpolate name to pull the file name out of the resource path and use
-    // it as the svg symbold id
-    const id = interpolateName({ resourcePath }, '[name]', { content: '' })
-
+  addSVG(resourcePath, svg, id) {
     const $ = cheerio.load(svg)
     const $svg = $('svg')
     const svgHTML = $svg.html()
