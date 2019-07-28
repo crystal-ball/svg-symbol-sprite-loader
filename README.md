@@ -11,26 +11,37 @@
   <small><em>Ultimate SVG Icon System</em></small>
 </h1>
 
-<p align="center">
+<div align="center">
   <a href="https://www.npmjs.com/package/svg-symbol-sprite-loader">
-    <img src="https://img.shields.io/npm/v/svg-symbol-sprite-loader.svg" alt="Module version">
+    <img src="https://img.shields.io/npm/v/svg-symbol-sprite-loader.svg?style=flat-square" alt="NPM version">
   </a>
   <a href="https://travis-ci.com/crystal-ball/svg-symbol-sprite-loader">
-    <img src="https://travis-ci.com/crystal-ball/svg-symbol-sprite-loader.svg?branch=master" alt="Build">
+    <img src="https://travis-ci.com/crystal-ball/svg-symbol-sprite-loader.svg?branch=master" alt="Travis build status">
   </a>
-  <a href="https://greenkeeper.io/" target="_blank" rel="noopener noreferrer">
-    <img src="https://badges.greenkeeper.io/crystal-ball/svg-symbol-sprite-loader.svg" alt="Greenkeeper badge"/>
+  <a href="https://renovatebot.com/">
+    <img src="https://img.shields.io/badge/Renovate-enabled-32c3c2.svg" alt="Dependency versions managed by Renovate" />
   </a>
-  <a href="https://github.com/prettier/prettier" target="_blank" rel="noopener noreferrer">
+  <a href="https://github.com/crystal-ball/svg-symbol-sprite-loader#zenhub">
+    <img src="https://img.shields.io/badge/shipping_faster_with-ZenHub-5e60ba.svg?style=flat-square" alt="ZenHub" />
+  </a>
+  <a href="https://prettier.io/">
     <img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg" alt="Prettier">
   </a>
-  <a href="https://github.com/semantic-release/semantic-release" target="_blank" rel="noopener noreferrer">
-    <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="managed by semantic release">
+  <a href="https://semantic-release.gitbook.io">
+    <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic_release-e10079.svg" alt="Semantic Release">
   </a>
-</p>
 
-This project includes a webpack loader and plugin that can be used with the icon
-sprite loader to create a performant process for creating SVG sprites.
+  <br />
+  <a href="https://github.com/crystal-ball">
+    <img src="https://img.shields.io/badge/%F0%9F%94%AE%E2%9C%A8-contains_magic-D831D7.svg" alt="Contains magic" />
+  </a>
+  <a href="https://github.com/crystal-ball/crystal-ball.github.io">
+    <img src="https://img.shields.io/badge/%F0%9F%92%96%F0%9F%8C%88-full_of_love-F5499E.svg" alt="Full of love" />
+  </a>
+</div>
+
+_This project includes a webpack loader and plugin that can be used with the
+icon sprite loader to create a performant process for creating SVG sprites._
 
 <ul>
   <li><a href="#complete">Configuration guide</a></li>
@@ -47,13 +58,13 @@ npm install svg-symbol-sprite-loader
 
 The _ultimate_ SVG icon system follows this workflow:
 
-1.  SVGs are imported into your application using the webpack loader, they can be
-    referenced by their ID.
+1.  SVGs are imported into your application using the webpack loader, they can
+    be referenced by their ID.
 1.  The imported SVGs are deduped, sorted, hashed and extracted by the webpack
     plugin.
-1.  The package exports a localStorage cache loader for browser bundles that will
-    import the emitted sprite. If the sprite contents change, the filename hash will
-    change and the sprite loader will fetch the latest sprite.
+1.  The package exports a localStorage cache loader for browser bundles that
+    will import the emitted sprite. If the sprite contents change, the filename
+    hash will change and the sprite loader will fetch the latest sprite.
 
 _ℹ️ See the [test application](./test-app) for a complete application example_
 
@@ -127,19 +138,20 @@ export default () => (
 
 <h2 id="system">SVG icon system motivation</h2>
 
-* Sprite only the SVG icons imported into your application.
-* Use local storage to cache sprites by content hash and only fetch a sprite when
-  its content has changed.
-* Load sprites from CDN locations without the CORS issues of relative SVG imports.
-* Symbol sprites are very effective for creating an icon system. They allows svgs to
-  be referenced by id, and don't require including viewbox attributes.
+- Sprite only the SVG icons imported into your application.
+- Use local storage to cache sprites by content hash and only fetch a sprite
+  when its content has changed.
+- Load sprites from CDN locations without the CORS issues of relative SVG
+  imports.
+- Symbol sprites are very effective for creating an icon system. They allows
+  svgs to be referenced by id, and don't require including viewbox attributes.
 
 ## Contributing 😃
 
 All contributions are greatly appreciated 👍🎉. To contribute please:
 
-* Review the repo [Code of Conduct][conduct], it is **not** just for show!
-* Review the [Contributing Guide][contributing] for a helpful code overview and
+- Review the repo [Code of Conduct][conduct], it is **not** just for show!
+- Review the [Contributing Guide][contributing] for a helpful code overview and
   repository pull request process details.
 
 ## Thank You 🙏
