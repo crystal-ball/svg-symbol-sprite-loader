@@ -1,5 +1,24 @@
 {
   "extends": [
     "config:base"
+  ],
+  "commitMessagePrefix": "Upgrade: ",
+  "labels": [
+    "Renovate"
+  ],
+  "masterIssue": true,
+  "schedule": [
+    "every weekend"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "*"
+      ],
+      "minor": {
+        "groupName": "all non-major dependencies",
+        "groupSlug": "all-minor-patch"
+      }
+    }
   ]
 }
