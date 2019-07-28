@@ -1,9 +1,9 @@
 /* eslint-disable */
-import path from 'path'
-import webpack from 'webpack'
-import memoryfs from 'memory-fs'
+const path = require('path')
+const webpack = require('webpack')
+const memoryfs = require('memory-fs')
 
-export default (fixture, options = {}) => {
+module.exports = function compiler(fixture, options = {}) {
   const compiler = webpack({
     context: __dirname,
     entry: `./${fixture}`,

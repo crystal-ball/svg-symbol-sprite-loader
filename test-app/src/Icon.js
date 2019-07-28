@@ -1,5 +1,5 @@
-// @flow
 import React from 'react'
+import { string } from 'prop-types'
 
 // Ionicons imports
 import doneAll from 'ionicons/dist/ionicons/svg/md-done-all.svg'
@@ -53,6 +53,11 @@ const Icon = ({ id, className }) => {
     </svg>
   )
 }
+Icon.propTypes = {
+  id: string.isRequired,
+  className: string,
+}
+
 Icon.defaultProps = {
   className: null,
 }

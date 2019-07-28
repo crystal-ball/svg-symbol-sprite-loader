@@ -1,3 +1,5 @@
+'use strict'
+
 const { getOptions, interpolateName } = require('loader-utils')
 const spriteStore = require('./sprite-store')
 

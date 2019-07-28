@@ -1,4 +1,3 @@
-/* eslint-env browser */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import svgSymbolSpriteLoader from 'svg-symbol-sprite-loader'

@@ -1,3 +1,5 @@
+'use strict'
+
 const Chunk = require('webpack/lib/Chunk')
 const { interpolateName } = require('loader-utils')
 
@@ -19,7 +21,7 @@ module.exports = class SVGSymbolSpritePlugin {
         /** By default inject sprite id into head */
         injectSpriteId: true,
       },
-      options || {}
+      options || {},
     )
   }
 
@@ -54,9 +56,9 @@ module.exports = class SVGSymbolSpritePlugin {
             // ℹ️ This will only match if a digest length hasn't been set
             /\[hash\]/,
             // see https://webpack.js.org/configuration/output/#output-hashdigestlength
-            `[hash:${compilation.outputOptions.hashDigestLength}]`
+            `[hash:${compilation.outputOptions.hashDigestLength}]`,
           ),
-          { content }
+          { content },
         )
 
         // 🤔 adding a chunk is required to get the emitted sprite included in the
@@ -96,7 +98,7 @@ module.exports = class SVGSymbolSpritePlugin {
             })
 
             cb(null, data)
-          }
+          },
         )
       })
     }
