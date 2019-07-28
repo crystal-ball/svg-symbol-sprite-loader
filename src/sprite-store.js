@@ -1,3 +1,5 @@
+'use strict'
+
 const cheerio = require('cheerio')
 
 /**
@@ -55,7 +57,7 @@ class SpriteStore {
     // icons will reference the symbols inside the svg.
     return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0">${sortedIcons.reduce(
       (prev, curr) => prev + this.icons.get(curr),
-      ''
+      '',
     )}</svg>`
   }
 }

@@ -1,3 +1,5 @@
+'use strict'
+
 const loader = require('./loader')
 const plugin = require('./plugin')
 

@@ -1,5 +1,4 @@
-// @flow
-import React, { type ComponentType } from 'react'
+import React from 'react'
 import { shape, string } from 'prop-types'
 
 import JavaScript from './media/javascript.svg'
@@ -35,8 +34,7 @@ Icon.defaultProps = {
 // Icon component set definition
 // ---------------------------------------------------------------------------
 
-const createIcon = icon => props =>
-  Icon.apply(null, [Object.assign({ icon }, props)])
+const createIcon = icon => props => Icon.apply(null, [Object.assign({ icon }, props)])
 
 const iconSet = {
   JavaScript,
@@ -44,16 +42,10 @@ const iconSet = {
   NodeJS,
 }
 
-type IconComponentType = ComponentType<{ id: string, className?: string }>
-
 /**
  * Set of icons for the application!, see http://google.com
  */
-const Icons: {
-  JavaScript: IconComponentType,
-  Bootstrap: IconComponentType,
-  NodeJS: IconComponentType,
-} = {}
+const Icons = {}
 Object.keys(iconSet).forEach(icon => {
   const IconComponent = createIcon(iconSet[icon])
   IconComponent.displayName = `Icons.${icon}`

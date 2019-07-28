@@ -1,5 +1,7 @@
-import { basename } from 'path'
-import compiler from './__mocks__/compiler'
+'use strict'
+
+const { basename } = require('path')
+const compiler = require('./__mocks__/compiler')
 
 // Testing setup copy-pasta'd from:
 // https://webpack.js.org/contribute/writing-a-loader/#testing

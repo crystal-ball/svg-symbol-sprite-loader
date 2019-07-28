@@ -1,17 +1,21 @@
 language: node_js
 node_js:
-  - "8"
+  - '10'
 
-sudo: false
+# Cache npm packages
+cache: npm
 
-install:
-  - npm install
+# Default for install is npm ci w/ package-lock.json
+# install
 
-script:
- - npm test
+# Default for script lifecycle is npm test
+# script
 
+# Release with Semantic after tests pass
 deploy:
   provider: script
+  # Prevent Travis from resetting working directory after build
   skip_cleanup: true
-  script:
-    - npx semantic-release
+  script: npx semantic-release
+  on:
+    branch: master

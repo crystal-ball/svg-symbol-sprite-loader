@@ -4,10 +4,10 @@
       '@babel/preset-env',
       {
         modules: false,
-        targets: { browsers: 'Chrome 71' },
-        useBuiltIns: 'usage'
+        targets: { browsers: 'chrome 71' },
+        useBuiltIns: 'usage',
       },
     ],
-    '@babel/preset-react'
+    '@babel/preset-react',
   ],
 }
