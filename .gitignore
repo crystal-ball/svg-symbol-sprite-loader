@@ -1,9 +1,10 @@
+# --- Ignore ---
+
 # Dependencies
 node_modules
 
-# Config
-.vscode
+# Build output
+public
 
-# Output
-.esm-cache
-docs
+# Test output
+coverage
