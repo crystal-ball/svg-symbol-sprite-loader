@@ -25,9 +25,9 @@
   <code>:status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>
 
   <br />
-  <!-- <a href="https://renovatebot.com/">
+  <a href="https://renovatebot.com/">
     <img src="https://img.shields.io/badge/Renovate-enabled-32c3c2.svg" alt="Renovate" valign="text-top" />
-  </a> -->
+  </a>
   <a href="https://commitizen.github.io/cz-cli/">
     <img src="https://img.shields.io/badge/Commitizen-%E2%9C%93%20friendly-10e67b" alt="Commitizen friendly" valign="text-top" />
   </a>
