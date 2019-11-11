@@ -1,4 +1,4 @@
-FROM node:12.7-alpine as base
+FROM node:12.13-alpine as base
 LABEL maintainer="hedgecock.d@gmail.com"
 
 WORKDIR /usr/src/app
