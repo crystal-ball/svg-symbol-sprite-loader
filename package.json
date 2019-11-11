@@ -22,7 +22,7 @@
     "container": "docker-compose run --service-ports --rm test-app",
     "test": "npm run test:lint && jest",
     "test:unit": "jest",
-    "test:lint": "NODE_ENV=test eslint src/*",
+    "test:lint": "NODE_ENV=test eslint src",
     "format": "prettier --write \"{src,test-app}/*.js\""
   },
   "peerDependencies": {
