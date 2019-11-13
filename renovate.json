@@ -1,24 +1,35 @@
 {
-  "extends": [
-    "config:base"
-  ],
-  "commitMessagePrefix": "Upgrade: ",
-  "labels": [
-    "Renovate"
-  ],
+  "automerge": false,
+  "ignorePaths": ["**/node_modules/**"],
+  "ignoreUnstable": true,
+  "labels": ["Renovate"],
+  "lockFileMaintenance": {
+    "enabled": false
+  },
   "masterIssue": true,
-  "schedule": [
-    "every weekend"
-  ],
+  "masterIssueTitle": "Renovate Bot - Dependencies Management",
+  "rangeStrategy": "auto",
+  "schedule": ["before 3am on Tuesday"],
+  "prCreation": "immediate",
+  "reviewers": ["dhedgecock"],
+  "updateNotScheduled": true,
+
   "packageRules": [
     {
-      "packagePatterns": [
-        "*"
-      ],
-      "minor": {
-        "groupName": "all non-major dependencies",
-        "groupSlug": "all-minor-patch"
-      }
+      "packagePatterns": ["*"],
+      "commitMessagePrefix": "Chore: ",
+      "commitMessageAction": "Update",
+      "commitMessageTopic": "package {{depName}}",
+      "commitMessageSuffix": " 🆙",
+      "groupName": "dev dependencies"
+    },
+    {
+      "depTypeList": ["dependencies"],
+      "commitMessagePrefix": "Update: ",
+      "commitMessageAction": "Package",
+      "commitMessageTopic": "{{depName}} upgrades",
+      "commitMessageSuffix": " 🆙",
+      "groupName": "dependencies"
     }
   ]
 }
