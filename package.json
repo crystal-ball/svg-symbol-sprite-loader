@@ -21,10 +21,9 @@
   "scripts": {
     "container": "docker-compose run --service-ports --rm test-app",
     "test": "npm run test:lint && npm run test:unit",
-    "test:format": "prettier --check src/**",
     "test:lint": "NODE_ENV=test eslint src",
     "test:unit": "jest",
-    "format": "prettier --write src/**"
+    "format": "prettier --write  '*.{js,json,md}' '**/*.{js,json,md,mdx,scss}' !CHANGELOG.md"
   },
   "peerDependencies": {
     "loader-utils": "1",
