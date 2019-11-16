@@ -20,38 +20,39 @@
   "license": "ISC",
   "scripts": {
     "container": "docker-compose run --service-ports --rm test-app",
-    "test": "npm run test:lint && jest",
-    "test:unit": "jest",
+    "test": "npm run test:lint && npm run test:unit",
+    "test:format": "prettier --check src/**",
     "test:lint": "NODE_ENV=test eslint src",
-    "format": "prettier --write \"{src,test-app}/*.js\""
+    "test:unit": "jest",
+    "format": "prettier --write src/**"
   },
   "peerDependencies": {
-    "loader-utils": "1.x",
-    "webpack": "4.x"
+    "loader-utils": "1",
+    "webpack": "4"
   },
   "dependencies": {
     "cheerio": "1.0.0-rc.3"
   },
   "devDependencies": {
-    "@crystal-ball/commitizen-adapter": "1.4.0",
-    "@crystal-ball/prettier-base": "1.2.0",
-    "@crystal-ball/semantic-release-base": "1.6.2",
+    "@crystal-ball/commitizen-base": "2.1.0",
+    "@crystal-ball/prettier-base": "1.6.0",
+    "@crystal-ball/semantic-release-base": "2.4.0",
     "babel-preset-env": "1.7.0",
-    "eslint-config-eloquence": "12.3.0",
-    "husky": "3.0.1",
-    "jest": "24.8.0",
+    "eslint-config-eloquence": "12.10.0",
+    "husky": "3.0.9",
+    "jest": "24.9.0",
     "loader-utils": "1.2.3",
-    "memory-fs": "0.4.1",
-    "webpack": "4.38.0"
+    "memory-fs": "0.5.0",
+    "webpack": "4.41.2"
   },
   "config": {
     "commitizen": {
-      "path": "@crystal-ball/commitizen-adapter"
+      "path": "@crystal-ball/commitizen-base"
     }
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook"
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "prettier": "@crystal-ball/prettier-base",
