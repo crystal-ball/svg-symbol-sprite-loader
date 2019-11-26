@@ -35,9 +35,9 @@
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.3.0",
     "@crystal-ball/prettier-base": "1.6.0",
-    "@crystal-ball/semantic-release-base": "2.5.0",
+    "@crystal-ball/semantic-release-base": "2.6.0",
     "babel-preset-env": "1.7.0",
-    "eslint-config-eloquence": "12.11.0",
+    "eslint-config-eloquence": "12.13.0",
     "husky": "3.1.0",
     "jest": "24.9.0",
     "loader-utils": "1.2.3",
