@@ -30,7 +30,7 @@
     "webpack": "4"
   },
   "dependencies": {
-    "parse5": "5.1.1"
+    "parse5": "5"
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.3.0",
