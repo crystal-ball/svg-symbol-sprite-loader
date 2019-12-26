@@ -54,6 +54,7 @@ class SpriteStore {
       const width = svgNode.attrs.find(attr => attr.name === 'width')
       const height = svgNode.attrs.find(attr => attr.name === 'height')
       if (!width || !height) {
+        // eslint-disable-next-line no-console
         console.warn(
           `Parsed svg from ${resourcePath} does not have a viewBox or width and height attributes!`,
         )
