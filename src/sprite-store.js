@@ -1,6 +1,23 @@
 'use strict'
 
-const cheerio = require('cheerio')
+const parse5 = require('parse5')
+
+/**
+ * Recursively searches an AST for an SVG node
+ * @param {Object} node AST node
+ */
+function findSVGNode(node) {
+  if (node.tagName === 'svg') return node
+
+  if (node.childNodes) {
+    const searchedChildren = node.childNodes
+      .map(findSVGNode)
+      .filter(childNode => childNode)
+    return searchedChildren.length ? searchedChildren[0] : null
+  }
+
+  return null
+}
 
 /**
  * The SpriteStore handles transforming and adding SVGs to an internal store by id.
@@ -24,22 +41,42 @@ class SpriteStore {
    * @return {Object} SVG meta data returned for loader including id
    */
   addSVG(resourcePath, svg, id) {
-    const $ = cheerio.load(svg)
-    const $svg = $('svg')
-    const svgHTML = $svg.html()
+    const document = parse5.parse(svg)
+    const svgNode = findSVGNode(document)
 
     // If a viewbox has not been defined on an SVG, use the width and height attrs
     // to create one
-    let viewBox = $svg.attr('viewBox')
-    if (!viewBox) {
-      const width = $svg.attr('width')
-      const height = $svg.attr('height')
-      viewBox = `0 0 ${width} ${height}`
+    let viewBox
+    const viewBoxAttr = svgNode.attrs.find(attr => attr.name === 'viewBox')
+    if (viewBoxAttr) {
+      viewBox = viewBoxAttr.value
+    } else {
+      const width = svgNode.attrs.find(attr => attr.name === 'width')
+      const height = svgNode.attrs.find(attr => attr.name === 'height')
+      viewBox = `0 0 ${width.value} ${height.value}`
     }
 
-    this.icons.set(id, `<symbol viewbox="${viewBox}" id="${id}">${svgHTML}</symbol>`)
+    // Create a <symbol /> with id and viewBox attrs, that's all we need for
+    // the svg symbol sprite
+    const symbol = parse5.serialize({
+      nodeName: '#document',
+      mode: 'quirks',
+      childNodes: [
+        {
+          nodeName: 'symbol',
+          tagName: 'symbol',
+          namespaceURI: 'http://www.w3.org/1999/xhtml',
+          attrs: [
+            { name: 'id', value: id },
+            { name: 'viewBox', value: viewBox },
+          ],
+          childNodes: svgNode.childNodes,
+        },
+      ],
+    })
 
-    // return the SVG meta, which currently is just id
+    this.icons.set(id, symbol)
+
     return { id }
   }
 
