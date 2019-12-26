@@ -14,6 +14,27 @@ with [@crystal-ball/semantic-release-base](https://github.com/crystal-ball/seman
 > - 🛠 - Fixes
 
 
+## [4.0.0](https://github.com/crystal-ball/svg-symbol-sprite-loader/compare/v3.3.0...v4.0.0) (2019-12-26)
+
+
+### 💥 Breaking Changes!
+
+* Cheerio used jQuery like selectors, and it's possible the new AST parsing may be
+missing edge case handling
+
+
+#### ✨ Update
+
+* Replace Cheerio with parse5 🆙 (#52)([aedef1a](https://github.com/crystal-ball/svg-symbol-sprite-loader/commit/aedef1a04bb40a0f65572818311b095574e10a07)), closes [#52](https://github.com/crystal-ball/svg-symbol-sprite-loader/issue/52)
+
+#### Chore
+
+* Add CODEOWNERS 📝([4b7d93d](https://github.com/crystal-ball/svg-symbol-sprite-loader/commit/4b7d93d6a0d477118af8fe4f63c1f49baa0703a5))
+* Package updates ⚙️([e186a46](https://github.com/crystal-ball/svg-symbol-sprite-loader/commit/e186a4679f65e8b101082084506e69befda99507))
+* Update dev dependencies 🆙 (#48)([731df5e](https://github.com/crystal-ball/svg-symbol-sprite-loader/commit/731df5ef75e3b292384cc8d2f256d756b55e5eeb)), closes [#48](https://github.com/crystal-ball/svg-symbol-sprite-loader/issue/48)
+* Update dev dependencies 🆙 (#49)([e94210d](https://github.com/crystal-ball/svg-symbol-sprite-loader/commit/e94210d79aeca08600c49d757320791a8e40f979)), closes [#49](https://github.com/crystal-ball/svg-symbol-sprite-loader/issue/49)
+* Update dev dependencies 🆙 (#50)([3aae1ef](https://github.com/crystal-ball/svg-symbol-sprite-loader/commit/3aae1efa76238d26a9b32621d4d18dfbdd3e7fe6)), closes [#50](https://github.com/crystal-ball/svg-symbol-sprite-loader/issue/50)
+
 ## [3.3.0](https://github.com/crystal-ball/svg-symbol-sprite-loader/compare/v3.2.0...v3.3.0) (2019-11-19)
 
 
