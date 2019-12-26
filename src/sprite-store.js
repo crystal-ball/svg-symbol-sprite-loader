@@ -46,14 +46,20 @@ class SpriteStore {
 
     // If a viewbox has not been defined on an SVG, use the width and height attrs
     // to create one
-    let viewBox
+    let viewBox = ''
     const viewBoxAttr = svgNode.attrs.find(attr => attr.name === 'viewBox')
     if (viewBoxAttr) {
       viewBox = viewBoxAttr.value
     } else {
       const width = svgNode.attrs.find(attr => attr.name === 'width')
       const height = svgNode.attrs.find(attr => attr.name === 'height')
-      viewBox = `0 0 ${width.value} ${height.value}`
+      if (!width || !height) {
+        console.warn(
+          `Parsed svg from ${resourcePath} does not have a viewBox or width and height attributes!`,
+        )
+      } else {
+        viewBox = `0 0 ${width.value} ${height.value}`
+      }
     }
 
     // Create a <symbol /> with id and viewBox attrs, that's all we need for
