@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const chunkHash = process.env.NODE_ENV === 'production' ? '.[chunkhash]' : ''
 
-module.exports = env => ({
+module.exports = (env) => ({
   mode: env,
   output: {
     publicPath: '/',
@@ -19,7 +19,7 @@ module.exports = env => ({
           {
             loader: 'svg-symbol-sprite-loader',
             options: {
-              symbolId: filePath => `icon-${basename(filePath, '.svg')}`,
+              symbolId: (filePath) => `icon-${basename(filePath, '.svg')}`,
             },
           },
         ],

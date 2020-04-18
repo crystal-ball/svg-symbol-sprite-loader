@@ -14,7 +14,7 @@ test('Inserts name and outputs JavaScript', async () => {
 
 test('Uses ID from symbolId option', async () => {
   const stats = await compiler('example.svg', {
-    symbolId: filePath => `icon-${basename(filePath, '.svg')}`,
+    symbolId: (filePath) => `icon-${basename(filePath, '.svg')}`,
   })
   const output = stats.toJson().modules[0].source
 

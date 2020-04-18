@@ -37,9 +37,9 @@ module.exports = class SVGSymbolSpritePlugin {
     // 🤔 The `compilation` hook is called twice and ends up producing an empty svg
     // sprite. The `thisCompiliation` hook is only called once. This seems to be the
     // correct hook to use ¯\_(ツ)_/¯
-    compiler.hooks.thisCompilation.tap('SVGSymbolSprite', compilation => {
+    compiler.hooks.thisCompilation.tap('SVGSymbolSprite', (compilation) => {
       // ℹ️ During additional assets hook, handle adding svg sprite to build assets
-      compilation.hooks.additionalAssets.tapAsync('SVGSymbolSprite', callback => {
+      compilation.hooks.additionalAssets.tapAsync('SVGSymbolSprite', (callback) => {
         // Get sprite content returns full svg symbol sprite ready for application
         const content = spriteStore.getSpriteContent()
 
@@ -84,7 +84,7 @@ module.exports = class SVGSymbolSpritePlugin {
 
     if (this.options.injectSpriteId) {
       // The alter asset tags hook is only called once during the compilation ¯\_(ツ)_/¯
-      compiler.hooks.compilation.tap('SVGSymbolSprite', compilation => {
+      compiler.hooks.compilation.tap('SVGSymbolSprite', (compilation) => {
         // HTML webpack plugin hook to alter the asset tags included in generated HTML
         compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync(
           'SVGSymbolSprite',
@@ -93,8 +93,9 @@ module.exports = class SVGSymbolSpritePlugin {
               tagName: 'script',
               closeTag: true,
               attributes: { type: 'text/javascript' },
-              innerHTML: `window.ICON_SPRITE_ID = "${compilation.outputOptions
-                .publicPath || ''}${resourcePath}";`,
+              innerHTML: `window.ICON_SPRITE_ID = "${
+                compilation.outputOptions.publicPath || ''
+              }${resourcePath}";`,
             })
 
             cb(null, data)

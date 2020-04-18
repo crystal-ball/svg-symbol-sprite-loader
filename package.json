@@ -26,7 +26,7 @@
     "format": "prettier --write '*.{js,json,md}' '**/*.{js,json,md,mdx,scss}' !CHANGELOG.md"
   },
   "peerDependencies": {
-    "loader-utils": "1",
+    "loader-utils": "2",
     "webpack": "4"
   },
   "dependencies": {
@@ -34,15 +34,15 @@
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.4.0",
-    "@crystal-ball/prettier-base": "1.6.0",
-    "@crystal-ball/semantic-release-base": "2.15.0",
+    "@crystal-ball/prettier-base": "2.1.0",
+    "@crystal-ball/semantic-release-base": "2.16.0",
     "babel-preset-env": "1.7.0",
-    "eslint-config-eloquence": "13.6.0",
-    "husky": "4.2.3",
-    "jest": "25.1.0",
-    "loader-utils": "1.4.0",
+    "eslint-config-eloquence": "13.7.0",
+    "husky": "4.2.5",
+    "jest": "25.3.0",
+    "loader-utils": "2.0.0",
     "memory-fs": "0.5.0",
-    "webpack": "4.42.0"
+    "webpack": "4.42.1"
   },
   "config": {
     "commitizen": {
