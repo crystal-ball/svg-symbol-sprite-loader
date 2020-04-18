@@ -29,12 +29,12 @@ function iconSpriteLoader({ customSpriteId, fetchOptions, useCache } = {}) {
     )
   } else {
     fetch(spriteId, fetchOptions)
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error(res.statusText)
         return res
       })
-      .then(res => res.text())
-      .then(svgSprite => {
+      .then((res) => res.text())
+      .then((svgSprite) => {
         document.body.insertAdjacentHTML('afterbegin', svgSprite)
         // Add version and data to localstorage for subsequent fetches 🎉
         if (localStorage && localStorage.setItem) {
@@ -43,7 +43,7 @@ function iconSpriteLoader({ customSpriteId, fetchOptions, useCache } = {}) {
         }
       })
       // eslint-disable-next-line
-      .catch(err => console.warn(`SVG sprite fetch failure: ${err.message}`))
+      .catch((err) => console.warn(`SVG sprite fetch failure: ${err.message}`))
   }
 }
 

@@ -12,7 +12,7 @@ function findSVGNode(node) {
   if (node.childNodes) {
     const searchedChildren = node.childNodes
       .map(findSVGNode)
-      .filter(childNode => childNode)
+      .filter((childNode) => childNode)
     return searchedChildren.length ? searchedChildren[0] : null
   }
 
@@ -47,12 +47,12 @@ class SpriteStore {
     // If a viewbox has not been defined on an SVG, use the width and height attrs
     // to create one
     let viewBox = ''
-    const viewBoxAttr = svgNode.attrs.find(attr => attr.name === 'viewBox')
+    const viewBoxAttr = svgNode.attrs.find((attr) => attr.name === 'viewBox')
     if (viewBoxAttr) {
       viewBox = viewBoxAttr.value
     } else {
-      const width = svgNode.attrs.find(attr => attr.name === 'width')
-      const height = svgNode.attrs.find(attr => attr.name === 'height')
+      const width = svgNode.attrs.find((attr) => attr.name === 'width')
+      const height = svgNode.attrs.find((attr) => attr.name === 'height')
       if (!width || !height) {
         // eslint-disable-next-line no-console
         console.warn(
