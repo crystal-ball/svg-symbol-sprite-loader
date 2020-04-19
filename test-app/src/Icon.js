@@ -2,9 +2,9 @@ import React from 'react'
 import { string } from 'prop-types'
 
 // Ionicons imports
-import doneAll from 'ionicons/dist/ionicons/svg/md-done-all.svg'
-import bonfire from 'ionicons/dist/ionicons/svg/md-bonfire.svg'
-import speedometer from 'ionicons/dist/ionicons/svg/md-speedometer.svg'
+import doneAll from 'ionicons/dist/ionicons/svg/checkmark-done-outline.svg'
+import bonfire from 'ionicons/dist/ionicons/svg/bonfire-outline.svg'
+import speedometer from 'ionicons/dist/ionicons/svg/speedometer-outline.svg'
 
 // /media imports
 import javascript from './media/javascript.svg'
@@ -54,8 +54,8 @@ const Icon = ({ id, className }) => {
   )
 }
 Icon.propTypes = {
-  id: string.isRequired,
   className: string,
+  id: string.isRequired,
 }
 
 Icon.defaultProps = {

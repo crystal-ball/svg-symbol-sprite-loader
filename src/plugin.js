@@ -1,7 +1,8 @@
 'use strict'
 
-const Chunk = require('webpack/lib/Chunk')
+const { RawSource } = require('webpack-sources')
 const { interpolateName } = require('loader-utils')
+const HtmlWebpackPlugin = require('safe-require')('html-webpack-plugin')
 
 const spriteStore = require('./sprite-store')
 
@@ -30,7 +31,6 @@ module.exports = class SVGSymbolSpritePlugin {
    * event hooks on the compiler.
    */
   apply(compiler) {
-    /* eslint-disable no-param-reassign */
     const { filename } = this.options
     let resourcePath
 
@@ -39,7 +39,7 @@ module.exports = class SVGSymbolSpritePlugin {
     // correct hook to use ¯\_(ツ)_/¯
     compiler.hooks.thisCompilation.tap('SVGSymbolSprite', (compilation) => {
       // ℹ️ During additional assets hook, handle adding svg sprite to build assets
-      compilation.hooks.additionalAssets.tapAsync('SVGSymbolSprite', (callback) => {
+      compilation.hooks.additionalAssets.tap('SVGSymbolSprite', () => {
         // Get sprite content returns full svg symbol sprite ready for application
         const content = spriteStore.getSpriteContent()
 
@@ -61,24 +61,7 @@ module.exports = class SVGSymbolSpritePlugin {
           { content },
         )
 
-        // 🤔 adding a chunk is required to get the emitted sprite included in the
-        // manifest file. There may be a better way to handle this...
-        const svgChunk = new Chunk('icon-sprite')
-        svgChunk.ids = []
-        svgChunk.files.push(resourcePath)
-        compilation.chunks.push(svgChunk)
-
-        // The asset file is included in the webpack compilation 🎉
-        compilation.assets[resourcePath] = {
-          source() {
-            return content
-          },
-          size() {
-            return content.length
-          },
-        }
-
-        callback()
+        compilation.emitAsset(resourcePath, new RawSource(content))
       })
     })
 
@@ -86,12 +69,12 @@ module.exports = class SVGSymbolSpritePlugin {
       // The alter asset tags hook is only called once during the compilation ¯\_(ツ)_/¯
       compiler.hooks.compilation.tap('SVGSymbolSprite', (compilation) => {
         // HTML webpack plugin hook to alter the asset tags included in generated HTML
-        compilation.hooks.htmlWebpackPluginAlterAssetTags.tapAsync(
+        HtmlWebpackPlugin.getHooks(compilation).alterAssetTagGroups.tapAsync(
           'SVGSymbolSprite',
           (data, cb) => {
-            data.head.push({
+            data.headTags.push({
               tagName: 'script',
-              closeTag: true,
+              voidTag: false,
               attributes: { type: 'text/javascript' },
               innerHTML: `window.ICON_SPRITE_ID = "${
                 compilation.outputOptions.publicPath || ''
