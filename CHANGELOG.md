@@ -13,6 +13,12 @@ with [@crystal-ball/semantic-release-base](https://github.com/crystal-ball/seman
 > - ✨ - Updates
 > - 🛠 - Fixes
 
+## [5.0.0](https://github.com/crystal-ball/svg-symbol-sprite-loader/compare/v4.0.0...v5.0.0) (2019-04-18)
+
+
+### 💥 Breaking Changes!
+
+* Version 4 of html-webpack-plugin is required if using `injectSpriteId`
 
 ## [4.0.0](https://github.com/crystal-ball/svg-symbol-sprite-loader/compare/v3.3.0...v4.0.0) (2019-12-26)
 
