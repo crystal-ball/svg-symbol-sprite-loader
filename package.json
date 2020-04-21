@@ -30,7 +30,7 @@
     "webpack": "4"
   },
   "dependencies": {
-    "parse5": "5",
+    "parse5": "6",
     "safe-require": "1",
     "webpack-sources": "1"
   },
