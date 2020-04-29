@@ -46,6 +46,7 @@
     "memory-fs": "0.5.0",
     "webpack": "4.43.0"
   },
+  "prettier": "@crystal-ball/prettier-base",
   "config": {
     "commitizen": {
       "path": "@crystal-ball/commitizen-base"
@@ -56,10 +57,14 @@
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
-  "prettier": "@crystal-ball/prettier-base",
   "release": {
     "extends": [
       "@crystal-ball/semantic-release-base"
+    ]
+  },
+  "renovate": {
+    "extends": [
+      "github>crystal-ball/renovate-base:library"
     ]
   }
 }
