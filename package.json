@@ -35,13 +35,13 @@
     "webpack-sources": "1"
   },
   "devDependencies": {
-    "@crystal-ball/commitizen-base": "2.6.0",
+    "@crystal-ball/commitizen-base": "2.7.1",
     "@crystal-ball/prettier-base": "2.2.0",
-    "@crystal-ball/semantic-release-base": "2.17.0",
+    "@crystal-ball/semantic-release-base": "2.18.1",
     "babel-preset-env": "1.7.0",
     "eslint-config-eloquence": "13.8.0",
     "husky": "4.2.5",
-    "jest": "25.4.0",
+    "jest": "26.0.1",
     "loader-utils": "2.0.0",
     "memory-fs": "0.5.0",
     "webpack": "4.43.0"
