@@ -36,9 +36,9 @@
     "@crystal-ball/prettier-base": "2.2.0",
     "@crystal-ball/semantic-release-base": "2.20.0",
     "babel-preset-env": "1.7.0",
-    "eslint-config-eloquence": "14.9.0",
+    "eslint-config-eloquence": "14.10.0",
     "husky": "4.2.5",
-    "jest": "26.2.2",
+    "jest": "26.3.0",
     "memory-fs": "0.5.0",
     "webpack": "4.44.1"
   },
