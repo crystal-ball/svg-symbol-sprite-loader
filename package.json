@@ -29,7 +29,7 @@
     "parse5": "6",
     "loader-utils": "2",
     "safe-require": "1",
-    "webpack-sources": "1"
+    "webpack-sources": "2"
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.8.0",
