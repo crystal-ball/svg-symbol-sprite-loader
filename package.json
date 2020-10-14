@@ -40,7 +40,7 @@
     "husky": "4.3.0",
     "jest": "26.5.2",
     "memory-fs": "0.5.0",
-    "webpack": "4.44.2"
+    "webpack": "5.1.0"
   },
   "prettier": "@crystal-ball/prettier-base",
   "config": {
