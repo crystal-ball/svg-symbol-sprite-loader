@@ -11,8 +11,8 @@
     "core-js": "3.6.5",
     "ionicons": "5.2.3",
     "prop-types": "15.7.2",
-    "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
