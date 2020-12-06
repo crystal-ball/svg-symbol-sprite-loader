@@ -8,7 +8,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "core-js": "3.7.0",
+    "core-js": "3.8.1",
     "ionicons": "5.2.3",
     "prop-types": "15.7.2",
     "react": "17.0.1",
