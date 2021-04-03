@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "github>crystal-ball/renovate-base:library"
+  ]
+}

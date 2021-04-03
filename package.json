@@ -19,6 +19,7 @@
   ],
   "license": "ISC",
   "scripts": {
+    "commit": "cz",
     "container": "docker-compose run --service-ports --rm test-app",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "NODE_ENV=test eslint src",
@@ -38,30 +39,8 @@
     "@types/jest": "26.0.22",
     "babel-preset-env": "1.7.0",
     "eslint-config-eloquence": "18.1.0",
-    "husky": "6.0.0",
     "jest": "26.6.3",
     "memfs": "3.2.1",
     "webpack": "5.30.0"
-  },
-  "prettier": "@crystal-ball/prettier-base",
-  "config": {
-    "commitizen": {
-      "path": "@crystal-ball/commitizen-base"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
-  },
-  "release": {
-    "extends": [
-      "@crystal-ball/semantic-release-base"
-    ]
-  },
-  "renovate": {
-    "extends": [
-      "github>crystal-ball/renovate-base:library"
-    ]
   }
 }
