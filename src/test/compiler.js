@@ -1,9 +1,10 @@
-/* eslint-disable */
+'use strict'
+
 const path = require('path')
 const webpack = require('webpack')
-const memoryfs = require('memory-fs')
+const { createFsFromVolume, Volume } = require('memfs')
 
-module.exports = function compiler(fixture, options = {}) {
+module.exports = (fixture, options = {}) => {
   const compiler = webpack({
     context: __dirname,
     entry: `./${fixture}`,
@@ -24,11 +25,13 @@ module.exports = function compiler(fixture, options = {}) {
     },
   })
 
-  compiler.outputFileSystem = new memoryfs()
+  compiler.outputFileSystem = createFsFromVolume(new Volume())
+  compiler.outputFileSystem.join = path.join.bind(path)
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) reject(err)
+      if (stats.hasErrors()) reject(stats.toJson().errors)
 
       resolve(stats)
     })

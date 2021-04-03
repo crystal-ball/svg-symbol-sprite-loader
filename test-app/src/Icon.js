@@ -2,9 +2,9 @@ import React from 'react'
 import { string } from 'prop-types'
 
 // Ionicons imports
-import doneAll from 'ionicons/dist/ionicons/svg/checkmark-done-outline.svg'
-import bonfire from 'ionicons/dist/ionicons/svg/bonfire-outline.svg'
-import speedometer from 'ionicons/dist/ionicons/svg/speedometer-outline.svg'
+import checkmark from 'ionicons/dist/svg/checkmark-circle.svg'
+import bonfire from 'ionicons/dist/svg/bonfire.svg'
+import speedometer from 'ionicons/dist/svg/speedometer.svg'
 
 // /media imports
 import javascript from './media/javascript.svg'
@@ -33,7 +33,7 @@ import nodejs from './media/nodejs.svg'
 const iconSet = {
   'md-bonfire': bonfire,
   'md-speedometer': speedometer,
-  'md-done-all': doneAll,
+  'md-checkmark': checkmark,
   javascript,
   bootstrap,
   nodejs,
