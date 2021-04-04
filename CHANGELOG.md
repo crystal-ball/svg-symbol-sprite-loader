@@ -13,6 +13,12 @@ with [@crystal-ball/semantic-release-base](https://github.com/crystal-ball/seman
 > - ✨ - Updates
 > - 🛠 - Fixes
 
+## [5.1.0](https://github.com/crystal-ball/svg-symbol-sprite-loader/compare/v5.0.0...v5.1.0) (2021-04-04)
+
+### ✨ Updates
+
+* Supports webpack v4 and v5
+
 ## [5.0.0](https://github.com/crystal-ball/svg-symbol-sprite-loader/compare/v4.0.0...v5.0.0) (2019-04-18)
 
 
