@@ -39,8 +39,8 @@
     "@types/jest": "26.0.23",
     "babel-preset-env": "1.7.0",
     "eslint-config-eloquence": "19.1.0",
-    "jest": "27.0.3",
+    "jest": "27.0.6",
     "memfs": "3.2.2",
-    "webpack": "5.38.1"
+    "webpack": "5.41.1"
   }
 }
