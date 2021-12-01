@@ -38,7 +38,7 @@
     "@crystal-ball/semantic-release-base": "2.34.0",
     "@types/jest": "27.0.3",
     "babel-preset-env": "1.7.0",
-    "eslint-config-eloquence": "20.0.2",
+    "eslint-config-eloquence": "21.0.1",
     "jest": "27.4.2",
     "memfs": "3.4.0",
     "webpack": "5.64.4"
