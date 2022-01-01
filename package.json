@@ -34,13 +34,13 @@
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.11.0",
-    "@crystal-ball/prettier-base": "2.9.0",
+    "@crystal-ball/prettier-base": "2.10.0",
     "@crystal-ball/semantic-release-base": "2.34.0",
-    "@types/jest": "27.0.3",
+    "@types/jest": "27.4.0",
     "babel-preset-env": "1.7.0",
-    "eslint-config-eloquence": "21.0.1",
-    "jest": "27.4.2",
-    "memfs": "3.4.0",
-    "webpack": "5.64.4"
+    "eslint-config-eloquence": "21.2.0",
+    "jest": "27.4.5",
+    "memfs": "3.4.1",
+    "webpack": "5.65.0"
   }
 }
