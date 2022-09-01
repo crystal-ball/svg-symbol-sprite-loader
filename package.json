@@ -36,7 +36,7 @@
     "@crystal-ball/commitizen-base": "2.11.0",
     "@crystal-ball/prettier-base": "2.12.0",
     "@crystal-ball/semantic-release-base": "2.39.0",
-    "@types/jest": "28.1.6",
+    "@types/jest": "28.1.8",
     "babel-preset-env": "1.7.0",
     "eslint-config-eloquence": "22.1.0",
     "jest": "28.1.3",
