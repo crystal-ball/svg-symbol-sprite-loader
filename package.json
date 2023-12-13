@@ -28,9 +28,9 @@
   },
   "dependencies": {
     "loader-utils": "2",
-    "parse5": "6",
+    "parse5": "7",
     "safe-require": "1",
-    "webpack-sources": "2"
+    "webpack-sources": "3"
   },
   "devDependencies": {
     "@crystal-ball/commitizen-base": "2.12.0",
